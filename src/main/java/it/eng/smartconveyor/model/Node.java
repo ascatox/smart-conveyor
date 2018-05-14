@@ -1,7 +1,5 @@
 package it.eng.smartconveyor.model;
 
-import it.eng.smartconveyor.tool.Actuator;
-import it.eng.smartconveyor.tool.Sensor;
 /**
  * @author clod16
 

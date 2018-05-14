@@ -1,4 +1,4 @@
-package it.eng.smartconveyor.tool;
+package it.eng.smartconveyor.model;
 /**
  * @author clod16
 
