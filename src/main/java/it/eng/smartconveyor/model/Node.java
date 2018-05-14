@@ -10,14 +10,16 @@ public class Node extends Slot {
     private int id;
     private Sensor sensor;
     private Actuator actuator;
+    private boolean fork;
 
     public Node() {
     }
 
-    public Node(int id, Sensor sensor, Actuator actuator) {
+    public Node(int id, Sensor sensor, Actuator actuator, boolean fork) {
         this.id = id;
         this.sensor = sensor;
         this.actuator = actuator;
+        this.fork = fork;
     }
 
     public int getId() {
@@ -30,6 +32,14 @@ public class Node extends Slot {
 
     public Sensor getSensor() {
         return sensor;
+    }
+
+    public boolean isFork() {
+        return fork;
+    }
+
+    public void setFork(boolean fork) {
+        this.fork = fork;
     }
 
     public void setSensor(Sensor sensor) {

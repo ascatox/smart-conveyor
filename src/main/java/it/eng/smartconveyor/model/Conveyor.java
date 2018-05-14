@@ -1,17 +1,16 @@
 package it.eng.smartconveyor.model;
 
-import it.eng.smartconveyor.model.Item;
-
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
+import java.util.Map;
 
 public class Conveyor {
-    Collection<Item> itemLinkedList = new LinkedList<>();
-    Collection<Segment> segmentCollection = new ArrayList<>();
-    Collection<Slot> slotCollection = new ArrayList<>();
 
+    Collection<Segment> segmentCollection;
+    Collection<Slot> slotCollection;
 
+    final static Map<String, Slot> itemAssignmentTable = null;
+    Map<Item, Slot> conveyorState;
+    Map<Item, List<>>dispatchPlan;
 
 
 
