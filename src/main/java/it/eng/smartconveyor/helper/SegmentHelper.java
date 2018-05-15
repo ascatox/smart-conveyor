@@ -1,4 +1,4 @@
-package it.eng.smartconveyor.base;
+package it.eng.smartconveyor.helper;
 
 import it.eng.smartconveyor.model.Conveyor;
 import it.eng.smartconveyor.model.Item;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SegmentSimulator {
+public class SegmentHelper {
 
     private Item item;
     private Conveyor conveyor = new Conveyor();
@@ -18,7 +18,7 @@ public class SegmentSimulator {
 
 
 
-    public SegmentSimulator() {
+    public SegmentHelper() {
     }
 
     public void createSegment() {
@@ -34,18 +34,20 @@ public class SegmentSimulator {
             for (int j = 0; j < itemList.size(); j++) {
 
                     segmentArray[i] = itemList.get(j);
-                    moveItem( segmentArray, itemList);
+                    move1Item1slot( segmentArray, i);
             }
         }
     }
 
-    public void moveItem(Item[] array, List list){
+    public void move1Item1slot(Item[] array, int i){
 
-        for(int i=0; i < array.length; i++){
-            if(array[i].equals(null)){
+        for(int j=i; i < array.length; j++){
+            if(array[j].equals(null)){
                 break;
             }
-            array[i+1]= array[i];
+            array[j+1]= array[j];
+            array[i]= null;
+            break;
         }
 
 

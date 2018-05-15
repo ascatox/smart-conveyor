@@ -10,11 +10,11 @@ import it.eng.smartconveyor.model.Item;
 public class Sensor {
 
 
-    public void itemIN(){ }
+    //public void itemIN(){ }
 
     //public void readItem(Item item ){}
 
-    public void  itemProximity(){}
+    //public void  itemProximity(){}
 
 }
 
