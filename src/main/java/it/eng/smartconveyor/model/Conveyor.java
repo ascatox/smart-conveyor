@@ -1,28 +1,31 @@
 package it.eng.smartconveyor.model;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Conveyor {
 
-    private  Collection<Segment> segmentCollection;
-    private  Collection<Slot> slotCollection;
+    private Collection<Segment> segmentCollection;
+    private Collection<Slot> slotCollection;
 
-    final static Map<String, Slot> itemAssignmentTable = null;
+    final static Map<String, Slot> itemAssignmentTable = new Hashtable<>();
     private Map<Item, Slot> conveyorState;
-    private Map<Item, Map<Integer, Integer>>dispatchPlan;
-    private String configuration;
+
+    private Map<Item, Map<Node, Integer>> dispatchPlan;
+    private String configuration; //TODO
+    private Collection<Route> routes;
 
     public Conveyor() {
+        this(new ArrayList<>(), new ArrayList<>(), new Hashtable<>(), new Hashtable<>(), null);
     }
 
-    public Conveyor(Collection<Segment> segmentCollection, Collection<Slot> slotCollection, Map<Item, Slot> conveyorState, Map<Item, Map<Integer, Integer>> dispatchPlan, String configuration) {
+    public Conveyor(Collection<Segment> segmentCollection, Collection<Slot> slotCollection, Map<Item, Slot> conveyorState, Map<Item, Map<Node, Integer>> dispatchPlan, String configuration) {
         this.segmentCollection = segmentCollection;
         this.slotCollection = slotCollection;
         this.conveyorState = conveyorState;
         this.dispatchPlan = dispatchPlan;
         this.configuration = configuration;
+
+        routes = new LinkedList<>();
     }
 
     public String getConfiguration() {
@@ -61,11 +64,19 @@ public class Conveyor {
         this.conveyorState = conveyorState;
     }
 
-    public Map<Item, Map<Integer, Integer>> getDispatchPlan() {
+    public Map<Item, Map<Node, Integer>> getDispatchPlan() {
         return dispatchPlan;
     }
 
-    public void setDispatchPlan(Map<Item, Map<Integer, Integer>> dispatchPlan) {
+    public void setDispatchPlan(Map<Item, Map<Node, Integer>> dispatchPlan) {
         this.dispatchPlan = dispatchPlan;
+    }
+
+    public Collection<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(Collection<Route> routes) {
+        this.routes = routes;
     }
 }

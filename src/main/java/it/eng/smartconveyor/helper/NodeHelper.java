@@ -13,22 +13,13 @@ public class NodeHelper {
     }
 
 
-
-
-
-
-
-
-    public boolean actuatorItemPush(){
+    public boolean actuatorItemPush() {
 
         return true;
 
     }
 
-    public void sensorItemIn(int itemID, int itemType){
-
-
-
+    public void sensorItemIn(int itemID, int itemType) {
 
 
     }
