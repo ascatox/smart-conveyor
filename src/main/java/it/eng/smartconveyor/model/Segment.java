@@ -41,4 +41,6 @@ public class Segment {
     public void setMovement(boolean movement) {
         this.movement = movement;
     }
+
+
 }
