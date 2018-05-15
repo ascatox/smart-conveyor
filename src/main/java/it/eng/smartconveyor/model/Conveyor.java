@@ -6,23 +6,32 @@ import java.util.Map;
 
 public class Conveyor {
 
-    Collection<Segment> segmentCollection;
-    Collection<Slot> slotCollection;
+    private  Collection<Segment> segmentCollection;
+    private  Collection<Slot> slotCollection;
 
     final static Map<String, Slot> itemAssignmentTable = null;
-    Map<Item, Slot> conveyorState;
-    Map<Item, Map<Integer, Integer>>dispatchPlan;
+    private Map<Item, Slot> conveyorState;
+    private Map<Item, Map<Integer, Integer>>dispatchPlan;
+    private String configuration;
 
     public Conveyor() {
     }
 
-    public Conveyor(Collection<Segment> segmentCollection, Collection<Slot> slotCollection, Map<Item, Slot> conveyorState, Map<Item, Map<Integer, Integer>> dispatchPlan) {
+    public Conveyor(Collection<Segment> segmentCollection, Collection<Slot> slotCollection, Map<Item, Slot> conveyorState, Map<Item, Map<Integer, Integer>> dispatchPlan, String configuration) {
         this.segmentCollection = segmentCollection;
         this.slotCollection = slotCollection;
         this.conveyorState = conveyorState;
         this.dispatchPlan = dispatchPlan;
+        this.configuration = configuration;
     }
 
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
+    }
 
     public Collection<Segment> getSegmentCollection() {
         return segmentCollection;
