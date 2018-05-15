@@ -1,93 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <conveyor>
     <route>
-        <item>
-            <id>A_1</id>
-            <type>oven</type>
-        </item>
-        <node>
-            <id>1</id>
-            <fork>0</fork>
-        </node>
-        <node>
-            <id>2</id>
-            <fork>5</fork>
-        </node>
-        <node>
-            <id>3</id>
-            <fork>0</fork>
-        </node>
+        <item id="A_1" type="oven"></item>
+        <node id="1" fork="0"></node>
+        <node id="2" fork="5"></node>
+        <node id="3" fork="0"></node>
     </route>
     <route>
-        <item>
-            <id>A_2</id>
-            <type>oven</type>
-        </item>
-        <node>
-            <id>1</id>
-            <fork>0</fork>
-        </node>
-        <node>
-            <id>2</id>
-            <fork>3</fork>
-        </node>
-        <node>
-            <id>3</id>
-            <fork>0</fork>
-        </node>
+        <item id="A_2" type="oven"></item>
+        <node id="1" fork="0"></node>
+        <node id="2" fork="3"></node>
+        <node id="3" fork="0"></node>
     </route>
     <route>
-        <item>
-            <id>B_1</id>
-            <type>fridge</type>
-        </item>
-        <node>
-            <id>1</id>
-            <fork>0</fork>
-        </node>
-        <node>
-            <id>2</id>
-            <fork>6</fork>
-        </node>
-        <node>
-            <id>3</id>
-            <fork>0</fork>
-        </node>
+        <item id="B_1" type="fridge"></item>
+        <node id="1" fork="0"></node>
+        <node id="2" fork="6"></node>
+        <node id="3" fork="0"></node>
     </route>
     <route>
-        <item>
-            <id>B_2</id>
-            <type>fridge</type>
-        </item>
-        <node>
-            <id>1</id>
-            <fork>0</fork>
-        </node>
-        <node>
-            <id>2</id>
-            <fork>2</fork>
-        </node>
-        <node>
-            <id>3</id>
-            <fork>0</fork>
-        </node>
+        <item id="B_1"></item>
+        <node fork="6"></node>
     </route>
     <route>
-        <item>
-            <id>A_3</id>
-            <type>oven</type>
-        </item>
-        <node>
-            <id>1</id>
-            <fork>0</fork>
-        </node>
-        <node>
-            <id>2</id>
-            <fork>8</fork>
-        </node>
-        <node>
-            <id>3</id>
-            <fork>0</fork>
-        </node>
+        <item id="B_2" type="fridge"></item>
+        <node id="1" fork="0"></node>
+        <node id="2" fork="2"></node>
+        <node id="3" fork="0"></node>
+    </route>
+    <route>
+        <item id="A_3" type="oven"></item>
+        <node id="1" fork="0"></node>
+        <node id="2" fork="8"></node>
+        <node id="3" fork="0"></node>
+    </route>
+    <route>
+        <item id="B_3" type="fridge"></item>
+        <node id="1" fork="0"></node>
+        <node id="2" fork="9"></node>
+        <node id="3" fork="0"></node>
+    </route>
+    <route>
+        <item id="B_4" type="fridge"></item>
+        <node id="1" fork="0"></node>
+        <node id="2" fork="1"></node>
+        <node id="3" fork="0"></node>
+    </route>
+    <route>
+        <item id="A_4" type="oven"></item>
+        <node id="1" fork="0"></node>
+        <node id="2" fork="5"></node>
+        <node id="3" fork="0"></node>
     </route>
 </conveyor>

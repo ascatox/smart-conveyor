@@ -22,7 +22,7 @@ public class HandlerHelper {
     }
 
     public Map<Item, Map<Node, Integer>> updatePlan() {
-        XMLReader.readDispactPlan();
+        //XMLReader.readDispactPlan();
         return null;
 
     }
