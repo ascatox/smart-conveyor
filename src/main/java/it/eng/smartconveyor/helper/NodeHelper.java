@@ -1,15 +1,18 @@
 package it.eng.smartconveyor.helper;
 
-import it.eng.smartconveyor.model.Actuator;
-import it.eng.smartconveyor.model.Node;
-import it.eng.smartconveyor.model.Sensor;
+import it.eng.smartconveyor.model.*;
+
+import java.util.Hashtable;
+import java.util.List;
 
 public class NodeHelper {
     private Sensor sensor;
     private Actuator actuator;
     private Node node;
+    HandlerHelper handlerHelper;
 
     public NodeHelper() {
+        handlerHelper = new HandlerHelper();
     }
 
 
@@ -18,9 +21,15 @@ public class NodeHelper {
         return true;
 
     }
+    public void sensorItemProximity(){
+        handlerHelper.doRoute(true);
+    }
 
-    public void sensorItemIn(int itemID, int itemType) {
+    public void sensorItemIn(Item item, Slot[] segmentConveyor) {
 
+
+
+        handlerHelper.doInput(true, item, segmentConveyor);
 
     }
 }

@@ -1,13 +1,13 @@
 package it.eng.smartconveyor.base;
 
 import it.eng.smartconveyor.helper.HandlerHelper;
+import it.eng.smartconveyor.helper.NodeHelper;
+import it.eng.smartconveyor.helper.SegmentHelper;
 import it.eng.smartconveyor.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * @author clod16
@@ -19,7 +19,8 @@ public final class Simulator {
     private Segment segment;
     private Node node;
     private Conveyor conveyor;
-
+    private SegmentHelper segmentHelper;
+    private NodeHelper nodeHelper;
     private HandlerHelper handlerHelper;
 
     private static final int CLOCK = 10 * 1000; //seconds
@@ -35,12 +36,36 @@ public final class Simulator {
         this.conveyor = conveyor;
 
         this.handlerHelper = new HandlerHelper();
+        this.segmentHelper = new SegmentHelper();
+        this.nodeHelper = new NodeHelper();
     }
+
 
     public void simulate() {
         //init Plan
+        Slot[] segmentConveyor = segmentHelper.createSegmentConveyor();
+        int sizeArray = segmentConveyor.length;
+        segmentConveyor[0] = node;
+        segmentConveyor[sizeArray]= node;
+        segmentConveyor[sizeArray/2] = node;
+
         handlerHelper.updatePlan();
+
         instantiateTimer();
+        try {
+            List<Item> itemList = new ArrayList<>();
+            for (Item key : conveyor.getDispatchPlan().keySet())
+                itemList.add(key);
+            for (int j = 0; j < itemList.size(); j++) {
+                nodeHelper.sensorItemIn(itemList.get(j), segmentConveyor);
+                Slot[] segmentArrayUpgrade = segmentHelper.addItemonSlot(segmentConveyor, itemList.get(j));
+                segmentHelper.moveItemOnSlot(segmentArrayUpgrade);
+                if(segmentArrayUpgrade[j+1] == node)
+                    nodeHelper.sensorItemProximity();
+            }
+        }catch (Exception e){
+        }
+
     }
 
 

@@ -18,9 +18,9 @@ public class XMLReader {
 
     public XMLReader() {
     }
-    public static void main(String argv[]) {
+    //public static void main(String argv[]) {
 
-    //public static Map<Item, Map<it.eng.smartconveyor.model.Node, Integer>> readDispactPlan() {
+    public Map<Item, Map<it.eng.smartconveyor.model.Node, Integer>> readDispactPlan() {
 
         try {
 
@@ -42,15 +42,18 @@ public class XMLReader {
 
                     System.out.println("Item type : " + element.getAttribute("type"));
                     System.out.println("Node fork : " + element.getAttribute("fork"));
-
+                    return null;
 
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
+    }
     }
 
-}
+
+
 
 

@@ -1,52 +1,63 @@
 package it.eng.smartconveyor.helper;
 
+import it.eng.smartconveyor.base.Simulator;
 import it.eng.smartconveyor.model.Conveyor;
 import it.eng.smartconveyor.model.Item;
 import it.eng.smartconveyor.model.Segment;
 import it.eng.smartconveyor.model.Slot;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class SegmentHelper {
 
     private Item item;
     private Conveyor conveyor = new Conveyor();
     private Segment segment = new Segment();
+    private Logger logger = LogManager.getLogger(Simulator.class);
 
 
     public SegmentHelper() {
     }
 
-    public void addItemOnSegment() {
-        final Map<Item, Slot> conveyorState = conveyor.getConveyorState();
+
+
+    public Slot[] createSegmentConveyor() {
+
         int lenght = segment.getLenght();
-        Item[] segmentArray = new Item[lenght];
-        List<Item> itemList = new ArrayList<>();
-
-        for (Item key : conveyorState.keySet())
-            itemList.add(key);
-
-        for (int i = 0; i < segmentArray.length; i++) {
-            for (int j = 0; j < itemList.size(); j++) {
-
-                segmentArray[i] = itemList.get(j);
-                move1Item1slot(segmentArray, i);
-            }
-        }
+        final  Slot[] slots = new Slot[lenght];
+        return slots;
     }
 
-    public void move1Item1slot(Item[] array, int i) {
-
-        for (int j = i; i < array.length; j++) {
-            if (array[j].equals(null)) {
+    public Slot[] addItemonSlot(Slot[] segmentArray, Item item){
+        int arraySize = segmentArray.length;
+        int count = 0;
+        Slot slot= new Slot();
+        for(int i=0; i<arraySize; i++){
+            ++count;
+            if(count >= arraySize){
+                logger.error("end of array, overflow error ");
                 break;
             }
-            array[j + 1] = array[j];
-            array[i] = null;
-            break;
+            slot.getItems().add(item);
+            segmentArray[i]= slot;
+            logger.debug("item add on slot");
+            moveItemOnSlot(segmentArray);
+            }
+        return segmentArray;
+    }
+
+
+
+
+    public Slot[] moveItemOnSlot(Slot[] slots) {
+
+        for(int i=slots.length-1; i>=0; i-- ){
+            if(slots[i].getItems().isEmpty()) --i;
+            slots[i+1]= slots[i];
+            logger.debug("item shift on right");
         }
+        return slots;
+
 
 
     }
