@@ -38,10 +38,10 @@ public class SegmentHelper {
                 logger.error("end of array, overflow error ");
                 break;
             }
-            slot.getItems().add(item);
+            slot.getItems().add(item); //FIXME indice
             segmentArray[i]= slot;
             logger.debug("item add on slot");
-            moveItemOnSlot(segmentArray);
+            shiftItemsOnSlot(segmentArray);
             }
         return segmentArray;
     }
@@ -49,7 +49,7 @@ public class SegmentHelper {
 
 
 
-    public Slot[] moveItemOnSlot(Slot[] slots) {
+    public Slot[] shiftItemsOnSlot(Slot[] slots) {
 
         for(int i=slots.length-1; i>=0; i-- ){
             if(slots[i].getItems().isEmpty()) --i;

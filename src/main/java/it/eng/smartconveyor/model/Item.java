@@ -6,22 +6,22 @@ package it.eng.smartconveyor.model;
 
 public class Item {
 
-    private int id;
+    private String id;
     private String type;
 
     public Item() {
     }
 
-    public Item(int id, String type) {
+    public Item(String id, String type) {
         this.id = id;
         this.type = type;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -51,6 +51,17 @@ public class XMLReader {
         }
         return null;
     }
+    public int searchItemRoute(String itemID){ //TODO
+
+        int numberOfRoute=0;
+        return numberOfRoute;
+    }
+
+    public int counterForkFromXML(){ //TODO
+             int numberOfFork=0;
+
+             return numberOfFork;
+    }
     }
 
 

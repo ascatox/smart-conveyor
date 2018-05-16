@@ -2,6 +2,7 @@ package it.eng.smartconveyor.helper;
 
 import it.eng.smartconveyor.model.*;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -16,13 +17,16 @@ public class NodeHelper {
     }
 
 
-    public boolean actuatorItemPush() {
+    public boolean actuatorItemPush(List<ArrayList<Slot>> segmentName, int numberFork) {
+
+
+
 
         return true;
 
     }
-    public void sensorItemProximity(){
-        handlerHelper.doRoute(true);
+    public void sensorItemProximity( List<ArrayList<Slot>> listofFork, Item item){
+        handlerHelper.doRoute(true, listofFork, item);
     }
 
     public void sensorItemIn(Item item, Slot[] segmentConveyor) {

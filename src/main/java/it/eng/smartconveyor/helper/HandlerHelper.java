@@ -4,6 +4,8 @@ import it.eng.smartconveyor.model.Item;
 import it.eng.smartconveyor.model.Node;
 import it.eng.smartconveyor.model.Slot;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,14 +29,16 @@ public class HandlerHelper {
 
         while(isItemIn){
             Slot[] segmentArrayUpgrade = segmentHelper.addItemonSlot(segmentConveyor, item);
-            segmentHelper.moveItemOnSlot(segmentArrayUpgrade);
-
+            segmentHelper.shiftItemsOnSlot(segmentArrayUpgrade);
         }
     }
 
-    public void doRoute(boolean isItemProximity) {
-       if(xmlReader.readDispactPlan().isEmpty());
-       nodeHelper.actuatorItemPush();
+    public void doRoute(boolean isItemProximity,  List<ArrayList<Slot>> listofFork, Item item) {
+        if(isItemProximity) {
+            if (xmlReader.readDispactPlan().isEmpty()) ;
+            int numberofFork= xmlReader.searchItemRoute(item.getId());
+            nodeHelper.actuatorItemPush(listofFork, numberofFork);
+        }
 
 
 
