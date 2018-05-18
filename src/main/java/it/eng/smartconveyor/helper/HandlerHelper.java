@@ -3,6 +3,7 @@ package it.eng.smartconveyor.helper;
 import it.eng.smartconveyor.model.Item;
 import it.eng.smartconveyor.model.Node;
 import it.eng.smartconveyor.model.Slot;
+import it.eng.smartconveyor.tool.XMLReader;
 
 import java.util.ArrayList;
 import java.util.List;

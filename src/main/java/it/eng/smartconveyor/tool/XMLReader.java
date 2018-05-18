@@ -1,20 +1,14 @@
-package it.eng.smartconveyor.helper;
+package it.eng.smartconveyor.tool;
 
-import it.eng.smartconveyor.base.Simulator;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import it.eng.smartconveyor.exception.ConveyorHubException;
 import it.eng.smartconveyor.model.Item;
-import it.eng.smartconveyor.tool.DispatchPlan;
+import it.eng.smartconveyor.model.Node;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.Map;
 
@@ -36,6 +30,7 @@ public class XMLReader {
            JAXBContext jaxbContext = JAXBContext.newInstance(DispatchPlan.class);
            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
            DispatchPlan dispatchPlan = (DispatchPlan) jaxbUnmarshaller.unmarshal(new File("dispatchPlan.xml"));  //FIXME path of .xml file
+           logger.debug("Object Dispatchplan build on!!!");
            formObjectToMap(dispatchPlan);
 
        } catch (Exception e) {
@@ -44,9 +39,11 @@ public class XMLReader {
        }
    }
 
+    private Map<Item, Map<Node, Integer>> formObjectToMap(DispatchPlan dispatchPlan) {
 
-
-    private Map<Item, Map<it.eng.smartconveyor.model.Node, Integer>> formObjectToMap(DispatchPlan dispatchPlan) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<Item, Map<Node, Integer>> mapMap= objectMapper.convertValue(dispatchPlan, Map.class);           //FIXME build map ad hoc!!!!
+        logger.debug("The Map build is:" +mapMap);
         return null;
 
     }

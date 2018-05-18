@@ -1,16 +1,14 @@
 package it.eng.smartconveyor.base;
 
-import com.sun.xml.internal.ws.message.stream.StreamAttachment;
 import it.eng.smartconveyor.exception.ConveyorHubException;
 import it.eng.smartconveyor.helper.HandlerHelper;
 import it.eng.smartconveyor.helper.NodeHelper;
 import it.eng.smartconveyor.helper.SegmentHelper;
-import it.eng.smartconveyor.helper.XMLReader;
+import it.eng.smartconveyor.tool.XMLReader;
 import it.eng.smartconveyor.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -52,6 +50,7 @@ public final class Simulator {
         //init Plan
 
         handlerHelper.updatePlan();
+        xmlReader.readDispactPlan();
 
         //init();
         Slot[] segmentConveyor = segmentHelper.createSegmentConveyor();   //FIXME create init() to inizialize all data structure
