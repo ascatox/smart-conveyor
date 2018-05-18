@@ -10,7 +10,7 @@ public class Conveyor {
     final static Map<String, Slot> itemAssignmentTable = new Hashtable<>();
     private Map<Item, Slot> conveyorState;
 
-    private Map<Item, Map<Node, Integer>> dispatchPlan;
+    private Map<Item, ArrayList<Node>> dispatchPlan;
     private String configuration; //TODO
     private Collection<Route> routes;
 
@@ -18,7 +18,7 @@ public class Conveyor {
         this(new ArrayList<>(), new ArrayList<>(), new Hashtable<>(), new Hashtable<>(), null);
     }
 
-    public Conveyor(Collection<Segment> segmentCollection, Collection<Slot> slotCollection, Map<Item, Slot> conveyorState, Map<Item, Map<Node, Integer>> dispatchPlan, String configuration) {
+    public Conveyor(Collection<Segment> segmentCollection, Collection<Slot> slotCollection, Map<Item, Slot> conveyorState,Map<Item, ArrayList<Node>> dispatchPlan, String configuration) {
         this.segmentCollection = segmentCollection;
         this.slotCollection = slotCollection;
         this.conveyorState = conveyorState;
@@ -64,11 +64,11 @@ public class Conveyor {
         this.conveyorState = conveyorState;
     }
 
-    public Map<Item, Map<Node, Integer>> getDispatchPlan() {
+    public Map<Item, ArrayList<Node>> getDispatchPlan() {
         return dispatchPlan;
     }
 
-    public void setDispatchPlan(Map<Item, Map<Node, Integer>> dispatchPlan) {
+    public void setDispatchPlan(Map<Item, ArrayList<Node>> dispatchPlan) {
         this.dispatchPlan = dispatchPlan;
     }
 

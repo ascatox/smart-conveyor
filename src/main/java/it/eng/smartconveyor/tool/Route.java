@@ -3,39 +3,31 @@ package it.eng.smartconveyor.tool;
 import it.eng.smartconveyor.model.Item;
 import it.eng.smartconveyor.model.Node;
 
-import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Route {
 
-    private Collection<Node> nodes;
-    private Collection<Item> items;
+    private ArrayList<Node> node;
+    private ArrayList<Item> item;
 
     public Route() {
-        this.nodes = new ArrayList<>();
-        this.items = new ArrayList<>();
+        this.node = new ArrayList<>();
+        this.item = new ArrayList<>();
     }
 
-
-    public Route(Collection<Node> nodes, Collection<Item> items) {
-        this.nodes = new ArrayList<>();
-        this.items = new ArrayList<>();
+    public ArrayList<Node> getNode() {
+        return node;
     }
 
-    public Collection<Node> getNodes() {
-        return nodes;
-    }
-    @XmlElement
-    public void setNodes(Collection<Node> nodes) {
-        this.nodes = nodes;
+    public void setNode(ArrayList<Node> node) {
+        this.node = node;
     }
 
-    public Collection<Item> getItems() {
-        return items;
+    public ArrayList<Item> getItem() {
+        return item;
     }
-    @XmlElement
-    public void setItems(Collection<Item> items) {
-        this.items = items;
+
+    public void setItem(ArrayList<Item> item) {
+        this.item = item;
     }
 }

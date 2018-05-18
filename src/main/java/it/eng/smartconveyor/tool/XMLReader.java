@@ -1,6 +1,5 @@
 package it.eng.smartconveyor.tool;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import it.eng.smartconveyor.exception.ConveyorHubException;
 import it.eng.smartconveyor.model.Item;
 import it.eng.smartconveyor.model.Node;
@@ -10,15 +9,17 @@ import org.apache.logging.log4j.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Map;
 
 /**
  * @author ascatox
  */
 public class XMLReader {
-    
-    private Logger logger = LogManager.getLogger(XMLReader.class);
+    private DispatchPlan dispatchPlan= new DispatchPlan();
 
+    private Logger logger = LogManager.getLogger(XMLReader.class);
 
 
     public XMLReader() {
@@ -26,26 +27,27 @@ public class XMLReader {
 
     public void readDispactPlan() throws ConveyorHubException {
 
-       try {
-           JAXBContext jaxbContext = JAXBContext.newInstance(DispatchPlan.class);
-           Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-           DispatchPlan dispatchPlan = (DispatchPlan) jaxbUnmarshaller.unmarshal(new File("dispatchPlan.xml"));  //FIXME path of .xml file
-           logger.debug("Object Dispatchplan build on!!!");
-           formObjectToMap(dispatchPlan);
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(DispatchPlan.class);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            DispatchPlan dispatchPlan = (DispatchPlan) jaxbUnmarshaller.unmarshal(new File("dispatchPlan.xml"));  //FIXME path of .xml file
+            logger.debug("Object Dispatchplan build on!!!");
+            formObjectToMap(dispatchPlan);
 
-       } catch (Exception e) {
-           logger.error(e);
-           throw new ConveyorHubException(e);
-       }
-   }
+        } catch (Exception e) {
+            logger.error(e);
+            throw new ConveyorHubException(e);
+        }
+    }
 
-    private Map<Item, Map<Node, Integer>> formObjectToMap(DispatchPlan dispatchPlan) {
+    private Map<Item, ArrayList<Node>> formObjectToMap(DispatchPlan dispatchPlan) {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<Item, Map<Node, Integer>> mapMap= objectMapper.convertValue(dispatchPlan, Map.class);           //FIXME build map ad hoc!!!!
-        logger.debug("The Map build is:" +mapMap);
-        return null;
-
+        Map<Item, ArrayList<Node>> map = new Hashtable<>();
+        for (Route route : dispatchPlan.getRoutes()) {
+            Item item = route.getItem().get(0);
+            map.put(item, route.getNode());
+        }
+        return map;
     }
 
 
@@ -55,10 +57,15 @@ public class XMLReader {
         return numberOfRoute;
     }
 
-    public int counterForkFromXML() { //TODO
-        int numberOfFork = 0;
+    public int counterForkFromXML() {//FIXME
+        int count=0;
 
-        return numberOfFork;
+        for(String bay : dispatchPlan.getBay() )
+
+            logger.debug("Number of baies:" +bay);
+            count++;
+
+        return count;
     }
 }
 

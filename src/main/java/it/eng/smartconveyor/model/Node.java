@@ -12,12 +12,12 @@ public class Node extends Slot {
     private int id;
     private Sensor sensor;
     private Actuator actuator;
-    private boolean fork;
+    private int fork;
 
     public Node() {
     }
 
-    public Node(int id, Sensor sensor, Actuator actuator, boolean fork) {
+    public Node(int id, Sensor sensor, Actuator actuator, int fork) {
         this.id = id;
         this.sensor = sensor;
         this.actuator = actuator;
@@ -36,11 +36,11 @@ public class Node extends Slot {
         return sensor;
     }
 
-    public boolean isFork() {
+    public int isFork() {
         return fork;
     }
-
-    public void setFork(boolean fork) {
+    @XmlAttribute
+    public void setFork(int fork) {
         this.fork = fork;
     }
 

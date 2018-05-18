@@ -10,16 +10,16 @@ import java.util.LinkedList;
 public class DispatchPlan {
 
     private Collection<Route> routes;
-    private Collection<String> bayList;
+    private Collection<String> bay;
 
     public DispatchPlan() {
         this.routes = new ArrayList<>();
-        this.bayList = new LinkedList<>();
+        this.bay = new LinkedList<>();
     }
 
     public DispatchPlan(Collection<Route> routes, LinkedList<String> bayList) {
         this.routes = new ArrayList<>();
-        this.bayList = new LinkedList<>();
+        this.bay = new LinkedList<>();
     }
 
 
@@ -31,11 +31,11 @@ public class DispatchPlan {
         this.routes = routes;
     }
 
-    public Collection<String> getBayList() {
-        return bayList;
+    public Collection<String> getBay() {
+        return bay;
     }
     @XmlElement
-    public void setBayList(Collection<String> bayList) {
-        this.bayList = bayList;
+    public void setBay(Collection<String> bay) {
+        this.bay = bay;
     }
 }

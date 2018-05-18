@@ -58,7 +58,7 @@ public final class Simulator {
         segmentConveyor[0] = node;
         segmentConveyor[sizeArray]= node;
         int count = xmlReader.counterForkFromXML();
-        List<ArrayList<Slot>> listofFork= creatFork(count);
+        List<ArrayList<Slot>> listofFork= createFork(count);
         logger.info("Segment created... \n Node created... \n SegmentFork created");
 
 
@@ -115,15 +115,16 @@ public final class Simulator {
     public void init(){
 
     }
-    public  List<ArrayList<Slot>>  creatFork(int count){
-        int size =0;
-        List<ArrayList<Slot>> listofFork = new ArrayList<>();
-        while(size<count){
-            listofFork.add(new ArrayList<Slot>());
-            size += 1;
 
+
+    public  List<ArrayList<Slot>> createFork(int count){     //FIXME method for create exit segment after fork
+        int size =0;
+        List<ArrayList<Slot>> listOfFork = new ArrayList<>();
+        while(size<count){
+            listOfFork.add(new ArrayList<>());
+            size += 1;
         }
-        return listofFork;
+        return listOfFork;
 
     }
 

@@ -54,7 +54,7 @@ public class HandlerHelper {
         return null;
     }
 
-    public Map<Item, Map<Node, Integer>> updatePlan() {
+    public Map<Item, ArrayList<Node>> updatePlan() {
         //XMLReader.readDispactPlan();
         return null;
 
