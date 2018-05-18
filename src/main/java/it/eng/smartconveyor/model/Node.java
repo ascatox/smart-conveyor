@@ -1,5 +1,7 @@
 package it.eng.smartconveyor.model;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 /**
  * @author clod16
 
@@ -25,7 +27,7 @@ public class Node extends Slot {
     public int getId() {
         return id;
     }
-
+    @XmlAttribute
     public void setId(int id) {
         this.id = id;
     }

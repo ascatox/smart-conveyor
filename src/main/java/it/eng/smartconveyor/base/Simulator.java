@@ -27,9 +27,9 @@ public final class Simulator {
     private SegmentHelper segmentHelper;
     private NodeHelper nodeHelper;
     private HandlerHelper handlerHelper;
-    XMLReader xmlReader;
+    private XMLReader xmlReader;
 
-    private static final int CLOCK = 10 * 1000; //seconds
+    private static final int CLOCK = 5 * 1000; //seconds
 
     public Simulator() {
         this(null, null, null , null);
@@ -54,7 +54,6 @@ public final class Simulator {
         handlerHelper.updatePlan();
 
         //init();
-                                                                            //SEE @ascatox
         Slot[] segmentConveyor = segmentHelper.createSegmentConveyor();   //FIXME create init() to inizialize all data structure
         int sizeArray = segmentConveyor.length;
         segmentConveyor[0] = node;
@@ -127,33 +126,8 @@ public final class Simulator {
         }
         return listofFork;
 
-
-
     }
 
-    //Segment operation
-    private void moveItem(Item item) {
-
-    }
-
-    //Slot operation
-    private Map<String, Slot> upgradeShareState() {
-
-        return null;
-    }
-
-    private Map<Item, Slot> upgradeConveyorState() {
-
-        return null;
-    }
-
-
-    //Node operation
-    private void readItem() {
-    }
-
-    private void pushItem() {
-    }
 
 
 }

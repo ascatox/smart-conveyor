@@ -1,4 +1,7 @@
 package it.eng.smartconveyor.model;
+
+import javax.xml.bind.annotation.XmlAttribute;
+
 /**
  * @author clod16
 
@@ -20,7 +23,7 @@ public class Item {
     public String getId() {
         return id;
     }
-
+    @XmlAttribute
     public void setId(String id) {
         this.id = id;
     }

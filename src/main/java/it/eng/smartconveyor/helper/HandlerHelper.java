@@ -35,14 +35,22 @@ public class HandlerHelper {
 
     public void doRoute(boolean isItemProximity,  List<ArrayList<Slot>> listofFork, Item item) {
         if(isItemProximity) {
-            if (xmlReader.readDispactPlan().isEmpty()) ;
+          //  if (xmlReader.readDispactPlan().isEmpty()) ;
             int numberofFork= xmlReader.searchItemRoute(item.getId());
             nodeHelper.actuatorItemPush(listofFork, numberofFork);
         }
 
+    }
 
 
+    private Map<String, Slot> upgradeShareState() {
 
+        return null;
+    }
+
+    private Map<Item, Slot> upgradeConveyorState() {
+
+        return null;
     }
 
     public Map<Item, Map<Node, Integer>> updatePlan() {
