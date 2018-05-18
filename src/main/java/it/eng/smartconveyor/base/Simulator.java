@@ -1,5 +1,7 @@
 package it.eng.smartconveyor.base;
 
+import com.sun.xml.internal.ws.message.stream.StreamAttachment;
+import it.eng.smartconveyor.exception.ConveyorHubException;
 import it.eng.smartconveyor.helper.HandlerHelper;
 import it.eng.smartconveyor.helper.NodeHelper;
 import it.eng.smartconveyor.helper.SegmentHelper;
@@ -8,7 +10,9 @@ import it.eng.smartconveyor.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @author clod16
@@ -44,7 +48,7 @@ public final class Simulator {
     }
 
 
-    public void simulate() {
+    public void simulate() throws ConveyorHubException {
         //init Plan
 
         handlerHelper.updatePlan();
@@ -69,19 +73,29 @@ public final class Simulator {
             for (int j = 0; j < itemList.size(); j++) {
                 nodeHelper.sensorItemIn(itemList.get(j), segmentConveyor);
                 logger.info("Item in on Conveyor");
+                //System.out.println(Arrays(segmentConveyor));
+
+                Stream<Slot> slotStream = Arrays.stream(segmentConveyor);
+                slotStream.forEach(slot -> System.out.println(slot));
+
                 Slot[] segmentArrayUpgrade = segmentHelper.addItemonSlot(segmentConveyor, itemList.get(j));
                 logger.info("Item added on segment");
                 segmentHelper.shiftItemsOnSlot(segmentArrayUpgrade);
                 logger.info("All item shift to right");
+
+                Stream<Slot> slotStreamUpgrade = Arrays.stream(segmentArrayUpgrade);
+                slotStreamUpgrade.forEach(slot -> System.out.println(slot));
+
                 if(segmentArrayUpgrade[j+1] == node)
                     logger.info("Caution, next slot is a Node....");
                     nodeHelper.sensorItemProximity(listofFork, itemList.get(j));
 
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
+            logger.error(e);
+            throw new ConveyorHubException(e);
         }
-
     }
 
 
