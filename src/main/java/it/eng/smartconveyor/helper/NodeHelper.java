@@ -1,16 +1,13 @@
 package it.eng.smartconveyor.helper;
 
-import it.eng.smartconveyor.base.Simulator;
 import it.eng.smartconveyor.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.boot.logging.Slf4JLoggingSystem;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class NodeHelper {
-    private Logger logger = LogManager.getLogger(Simulator.class);
+    private Logger logger = LogManager.getLogger(NodeHelper.class);
 
 
     private Sensor sensor;

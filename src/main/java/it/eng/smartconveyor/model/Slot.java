@@ -1,8 +1,5 @@
 package it.eng.smartconveyor.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 /**
  * @author clod16
 

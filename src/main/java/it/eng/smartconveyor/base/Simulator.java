@@ -123,7 +123,7 @@ public final class Simulator {
 
 
     public  ArrayList<Slot> createFork(int count){     //FIXME method for
-        // exit segment after fork
+                                                                        //method for create exit segment after fork
         int size =0;
         ArrayList<Slot> listOfFork = new ArrayList<>();
         while(size<count){

@@ -1,7 +1,5 @@
 package it.eng.smartconveyor.exception;
 
-import java.util.function.Function;
-
 public class ConveyorHubException extends Exception {
 
     public ConveyorHubException() {

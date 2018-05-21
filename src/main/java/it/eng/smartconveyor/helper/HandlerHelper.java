@@ -1,6 +1,5 @@
 package it.eng.smartconveyor.helper;
 
-import it.eng.smartconveyor.base.Simulator;
 import it.eng.smartconveyor.model.Conveyor;
 import it.eng.smartconveyor.model.Item;
 import it.eng.smartconveyor.model.Node;
@@ -10,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,7 +16,7 @@ import java.util.Map;
  */
 
 public class HandlerHelper {
-    private Logger logger = LogManager.getLogger(Simulator.class);
+    private Logger logger = LogManager.getLogger(HandlerHelper.class);
 
 
     SegmentHelper segmentHelper;

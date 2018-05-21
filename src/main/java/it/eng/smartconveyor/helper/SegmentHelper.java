@@ -1,6 +1,5 @@
 package it.eng.smartconveyor.helper;
 
-import it.eng.smartconveyor.base.Simulator;
 import it.eng.smartconveyor.model.Conveyor;
 import it.eng.smartconveyor.model.Item;
 import it.eng.smartconveyor.model.Segment;
@@ -13,7 +12,7 @@ public class SegmentHelper {
     private Item item;
     private Conveyor conveyor = new Conveyor();
     private Segment segment = new Segment();
-    private Logger logger = LogManager.getLogger(Simulator.class);
+    private Logger logger = LogManager.getLogger(SegmentHelper.class);
 
 
     public SegmentHelper() {
