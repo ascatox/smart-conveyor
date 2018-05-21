@@ -31,7 +31,7 @@ public class XMLReader {
             JAXBContext jaxbContext = JAXBContext.newInstance(DispatchPlan.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             DispatchPlan dispatchPlan = (DispatchPlan) jaxbUnmarshaller.unmarshal(new File("dispatchPlan.xml"));  //FIXME path of .xml file
-            logger.debug("Object Dispatchplan build on!!!");
+            logger.info("Object Dispatchplan build on!!!");
             formObjectToMap(dispatchPlan);
 
         } catch (Exception e) {
@@ -47,24 +47,26 @@ public class XMLReader {
             Item item = route.getItem().get(0);
             map.put(item, route.getNode());
         }
+        logger.info("Map are created from .xml");
         return map;
     }
 
 
-    public int searchItemRoute(Item item, Map<Item, ArrayList<Node>> dispatchPlan) { //TODO
+    public int searchItemRoute(Item item, Map<Item, ArrayList<Node>> dispatchPlan) { //FIXME metodo che  estrapola la strada da percorrere dato un Item
 
         ArrayList<Node> nodeArrayList = dispatchPlan.get(item);
         Node node = nodeArrayList.get(1);
+        logger.info("Item route extract");
         return  node.getId();
         }
 
 
-    public int counterForkFromXML() {//FIXME
+    public int counterForkFromXML() {//FIXME 
         int count=0;
 
         for(String bay : dispatchPlan.getBay() )
 
-            logger.debug("Number of baies:" +bay);
+            logger.info("Number of exit bay:" +bay);
             count++;
 
         return count;

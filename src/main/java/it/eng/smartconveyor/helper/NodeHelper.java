@@ -23,21 +23,22 @@ public class NodeHelper {
     }
 
 
-    public boolean actuatorItemPush(ArrayList<Slot> segmentFork, int numberFork, Item item) {
+    public Slot actuatorItemPush(ArrayList<Slot> segmentFork, int numberFork, Item item) {
 
         Slot forkSlot = segmentFork.get(numberFork);
         forkSlot.setItem(item);
-        return true;
+        logger.info("item successfully pushed!!!");
+        return forkSlot;
 
     }
-    public void sensorItemProximity( ArrayList<Slot> listOfFork, Item item){
-        handlerHelper.doRoute(true, listOfFork, item);
+    public Slot sensorItemProximity( ArrayList<Slot> listOfFork, Item item){
+        logger.info("Item is near the node");
+         Slot slot = handlerHelper.doRoute(true, listOfFork, item);
+         return slot;
     }
 
     public void sensorItemIn(Item item, Slot[] segmentConveyor) {
-
-
-
+        logger.info("New Item is entering on segment");
         handlerHelper.doInput(true, item, segmentConveyor);
 
     }

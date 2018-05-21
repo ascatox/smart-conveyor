@@ -48,6 +48,7 @@ public final class Simulator {
 
     public void simulate() throws ConveyorHubException {
         //init Plan
+        logger.info("Simulation start!!!");
 
         handlerHelper.updatePlan();
         xmlReader.readDispactPlan();
@@ -61,7 +62,6 @@ public final class Simulator {
         ArrayList<Slot> listOfFork= createFork(count);
         logger.info("Segment created... \n Node created... \n SegmentFork created");
 
-
         instantiateTimer();
         try {
             List<Item> itemList = new ArrayList<>();
@@ -71,7 +71,6 @@ public final class Simulator {
             for (int j = 0; j < itemList.size(); j++) {
                 nodeHelper.sensorItemIn(itemList.get(j), segmentConveyor);
                 logger.info("Item in on Conveyor");
-                //System.out.println(Arrays(segmentConveyor));
 
                 Stream<Slot> slotStream = Arrays.stream(segmentConveyor);
                 slotStream.forEach(slot -> System.out.println(slot));
@@ -86,8 +85,12 @@ public final class Simulator {
 
                 if(segmentArrayUpgrade[j+1] == node){
                     logger.info("Caution, next slot is a Node....");
-                    nodeHelper.sensorItemProximity(listOfFork, itemList.get(j));
-                    logger.debug("Item are passed the fork-node and it pushed in the right way.... ");
+                    Slot slot = nodeHelper.sensorItemProximity(listOfFork, itemList.get(j));
+                    logger.info("Item are passed the fork-node and it pushed in the right way.... ");
+                    int numberOfFork= xmlReader.searchItemRoute(itemList.get(j), conveyor.getDispatchPlan() );
+                    listOfFork.set(numberOfFork, slot);
+                    logger.info("Slot after fork upgrade with correct item!!!");
+
                 }
 
 
@@ -114,22 +117,22 @@ public final class Simulator {
 
     }
 
-    public void init(){
+    public void init(){  //TODO
 
     }
 
 
-    public  ArrayList<Slot> createFork(int count){     //FIXME method for create exit segment after fork
+    public  ArrayList<Slot> createFork(int count){     //FIXME method for
+        // exit segment after fork
         int size =0;
         ArrayList<Slot> listOfFork = new ArrayList<>();
         while(size<count){
             listOfFork.add(new Slot());
             size += 1;
         }
+        logger.info("Fork created!!!");
         return listOfFork;
 
     }
-
-
 
 }

@@ -19,8 +19,6 @@ public class SegmentHelper {
     public SegmentHelper() {
     }
 
-
-
     public Slot[] createSegmentConveyor() {
 
         int lenght = segment.getLenght();
@@ -40,13 +38,11 @@ public class SegmentHelper {
             }
             slot.setItem(item);//FIXME indice
             segmentArray[i]= slot;
-            logger.debug("item add on slot");
+            logger.info("item add on slot");
             shiftItemsOnSlot(segmentArray);
             }
         return segmentArray;
     }
-
-
 
 
     public Slot[] shiftItemsOnSlot(Slot[] slots) {
@@ -54,7 +50,7 @@ public class SegmentHelper {
         for(int i=slots.length-1; i>=0; i-- ){
             if(slots[i].getItem() == null ) --i;
             slots[i+1]= slots[i];
-            logger.debug("item shift on right");
+            logger.info("item shift on right");
         }
         return slots;
 

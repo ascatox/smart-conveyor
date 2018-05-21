@@ -40,21 +40,21 @@ public class HandlerHelper {
         while(isItemIn){
             Slot[] segmentArrayUpgrade = segmentHelper.addItemOnSlot(segmentConveyor, item);
             segmentHelper.shiftItemsOnSlot(segmentArrayUpgrade);
+            logger.info("ItemIn completed");
         }
     }
 
-    public void doRoute(boolean isItemProximity,  ArrayList<Slot> listOfFork, Item item) {
+    public Slot doRoute(boolean isItemProximity,  ArrayList<Slot> listOfFork, Item item) {
         if(isItemProximity) {
             //if (xmlReader.readDispactPlan().isEmpty()) ;
             int numberOfFork= xmlReader.searchItemRoute(item, conveyor.getDispatchPlan() );
-            logger.debug("Route of Item found.....");
+            logger.info("Route of Item found.....");
 
-            nodeHelper.actuatorItemPush(listOfFork, numberOfFork, item);
-            logger.debug("Item push on fork number:" +numberOfFork);
-
-
-
+            Slot slot =nodeHelper.actuatorItemPush(listOfFork, numberOfFork, item);
+            logger.info("Item push on fork number:" +numberOfFork);
+            return slot;
         }
+        return null;
 
     }
 
@@ -69,7 +69,7 @@ public class HandlerHelper {
         return null;
     }
 
-    public Map<Item, ArrayList<Node>> updatePlan() {
+    public Map<Item, ArrayList<Node>> updatePlan() { //TODO
         //XMLReader.readDispactPlan();
         return null;
 
