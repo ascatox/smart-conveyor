@@ -52,7 +52,7 @@ public class XMLReader {
     }
 
 
-    public int searchItemRoute(Item item, Map<Item, ArrayList<Node>> dispatchPlan) { //FIXME metodo che  estrapola la strada da percorrere dato un Item
+    public int searchItemRoute(Item item, Map<Item, ArrayList<Node>> dispatchPlan) { //FIXME metodo che estrapola la strada da percorrere dato un Item
 
         ArrayList<Node> nodeArrayList = dispatchPlan.get(item);
         Node node = nodeArrayList.get(1);
@@ -61,7 +61,7 @@ public class XMLReader {
         }
 
 
-    public int counterForkFromXML() {//FIXME 
+    public int counterForkFromXML() {//FIXME
         int count=0;
 
         for(String bay : dispatchPlan.getBay() )

@@ -46,7 +46,7 @@ public final class Simulator {
     }
 
 
-    public void simulate() throws ConveyorHubException {
+    public void simulate() throws ConveyorHubException {               //TODO integrare ad ogni operazione il metodo upgradeConveyorState!!!!!!!!
         //init Plan
         logger.info("Simulation start!!!");
 
@@ -58,41 +58,41 @@ public final class Simulator {
         int sizeArray = segmentConveyor.length;
         segmentConveyor[0] = node;
         segmentConveyor[sizeArray]= node;
-        int count = xmlReader.counterForkFromXML();
-        ArrayList<Slot> listOfFork= createFork(count);
+
+        int count = xmlReader.counterForkFromXML();    //counter for daily fork
+        ArrayList<Slot> listOfFork= createFork(count);   //create fork
         logger.info("Segment created... \n Node created... \n SegmentFork created");
 
         instantiateTimer();
         try {
             List<Item> itemList = new ArrayList<>();
-            for (Item key : conveyor.getDispatchPlan().keySet())
+            for (Item key : conveyor.getDispatchPlan().keySet())   //extract all  daily item
                 itemList.add(key);
             logger.info("Item extract from dispatch plan" + itemList );
-            for (int j = 0; j < itemList.size(); j++) {
-                nodeHelper.sensorItemIn(itemList.get(j), segmentConveyor);
-                logger.info("Item in on Conveyor");
+            for (int j = 0; j < itemList.size(); j++) {             //start simulation
 
+                nodeHelper.sensorItemIn(itemList.get(j), segmentConveyor);  //OP1: add item in the segmentConveyor[0]
+                logger.info("ItemIn on Conveyor");
                 Stream<Slot> slotStream = Arrays.stream(segmentConveyor);
                 slotStream.forEach(slot -> System.out.println(slot));
-
                 Slot[] segmentArrayUpgrade = segmentHelper.addItemOnSlot(segmentConveyor, itemList.get(j));
                 logger.info("Item added on segment");
-                segmentHelper.shiftItemsOnSlot(segmentArrayUpgrade);
+                segmentHelper.shiftItemsOnSlot(segmentArrayUpgrade);   //OP1.1: move Item of a position
                 logger.info("All item shift to right");
 
                 Stream<Slot> slotStreamUpgrade = Arrays.stream(segmentArrayUpgrade);
                 slotStreamUpgrade.forEach(slot -> System.out.println(slot));
 
                 if(segmentArrayUpgrade[j+1] == node){
-                    logger.info("Caution, next slot is a Node....");
-                    Slot slot = nodeHelper.sensorItemProximity(listOfFork, itemList.get(j));
+                    logger.info("Caution, next slot is a Node....");                  //OP2: next slot is a Node, search the right way of a Item and push it
+                    Slot slot = nodeHelper.sensorItemProximity(listOfFork, itemList.get(j));  // in the segmentFork correct!!!
                     logger.info("Item are passed the fork-node and it pushed in the right way.... ");
                     int numberOfFork= xmlReader.searchItemRoute(itemList.get(j), conveyor.getDispatchPlan() );
                     listOfFork.set(numberOfFork, slot);
                     logger.info("Slot after fork upgrade with correct item!!!");
 
                 }
-
+                                                                                            //Repeat for all item in itemList!!!!
 
             }
         } catch (Exception e) {

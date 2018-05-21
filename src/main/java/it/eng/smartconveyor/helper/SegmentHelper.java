@@ -27,7 +27,15 @@ public class SegmentHelper {
     }
 
     public Slot[] addItemOnSlot(Slot[] segmentArray, Item item){
-        int arraySize = segmentArray.length;
+
+        segmentArray[0].setItem(item);
+        logger.info("item add on slot");
+        Slot[] slots =shiftItemsOnSlot(segmentArray);
+        logger.info(" Ok, item add and move on right on Conveyor segment");
+
+         return  slots;
+
+       /* int arraySize = segmentArray.length;
         int count = 0;
         Slot slot= new Slot();
         for(int i=0; i<arraySize; i++){
@@ -41,20 +49,23 @@ public class SegmentHelper {
             logger.info("item add on slot");
             shiftItemsOnSlot(segmentArray);
             }
-        return segmentArray;
+        return segmentArray;*/
     }
 
 
     public Slot[] shiftItemsOnSlot(Slot[] slots) {
 
         for(int i=slots.length-1; i>=0; i-- ){
-            if(slots[i].getItem() == null ) --i;
-            slots[i+1]= slots[i];
-            logger.info("item shift on right");
+            if(slots[i].getItem() != null ) {
+                slots[i + 1] = slots[i];
+                logger.info("item shift on right");
+                return slots;
+            }
+            else
+                i--;
         }
-        return slots;
-
-
+        logger.info(("No item on segment conveyor..."));
+        return null;
 
     }
 
