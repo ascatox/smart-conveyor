@@ -8,7 +8,7 @@ public class Conveyor {
     private Collection<Slot> slotCollection;
 
     final static Map<String, Slot> itemAssignmentTable = new Hashtable<>();
-    private Map<Item, Slot> conveyorState;
+    private Map<Item, Slot> conveyorState; //TODO rappresentazione live (aggironata ogni step) della posizione di ogni item nel suo relativo slot
 
     private Map<Item, ArrayList<Node>> dispatchPlan;
     private String configuration; //TODO

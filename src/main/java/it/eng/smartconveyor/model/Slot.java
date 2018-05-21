@@ -11,14 +11,14 @@ import java.util.Collection;
  public class Slot {
 
     private int positionItem;
-    Collection<Item> items = new ArrayList<>();
+    Item item;
 
     public Slot() {
     }
 
-    public Slot(int positionItem, Collection<Item> items) {
+    public Slot(int positionItem, Item item) {
         this.positionItem = positionItem;
-        this.items = new ArrayList<>();
+        this.item = item;
     }
 
     public int getPositionItem() {
@@ -29,11 +29,11 @@ import java.util.Collection;
         this.positionItem = positionItem;
     }
 
-    public Collection<Item> getItems() {
-        return items;
+    public Item getItem() {
+        return item;
     }
 
-    public void setItems(Collection<Item> items) {
-        this.items = items;
+    public void setItem(Item item) {
+        this.item = item;
     }
 }

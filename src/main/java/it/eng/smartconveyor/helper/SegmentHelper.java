@@ -28,7 +28,7 @@ public class SegmentHelper {
         return slots;
     }
 
-    public Slot[] addItemonSlot(Slot[] segmentArray, Item item){
+    public Slot[] addItemOnSlot(Slot[] segmentArray, Item item){
         int arraySize = segmentArray.length;
         int count = 0;
         Slot slot= new Slot();
@@ -38,7 +38,7 @@ public class SegmentHelper {
                 logger.error("end of array, overflow error ");
                 break;
             }
-            slot.getItems().add(item); //FIXME indice
+            slot.setItem(item);//FIXME indice
             segmentArray[i]= slot;
             logger.debug("item add on slot");
             shiftItemsOnSlot(segmentArray);
@@ -52,7 +52,7 @@ public class SegmentHelper {
     public Slot[] shiftItemsOnSlot(Slot[] slots) {
 
         for(int i=slots.length-1; i>=0; i-- ){
-            if(slots[i].getItems().isEmpty()) --i;
+            if(slots[i].getItem() == null ) --i;
             slots[i+1]= slots[i];
             logger.debug("item shift on right");
         }

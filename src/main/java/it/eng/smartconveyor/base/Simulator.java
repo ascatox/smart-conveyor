@@ -58,7 +58,7 @@ public final class Simulator {
         segmentConveyor[0] = node;
         segmentConveyor[sizeArray]= node;
         int count = xmlReader.counterForkFromXML();
-        List<ArrayList<Slot>> listofFork= createFork(count);
+        ArrayList<Slot> listOfFork= createFork(count);
         logger.info("Segment created... \n Node created... \n SegmentFork created");
 
 
@@ -76,7 +76,7 @@ public final class Simulator {
                 Stream<Slot> slotStream = Arrays.stream(segmentConveyor);
                 slotStream.forEach(slot -> System.out.println(slot));
 
-                Slot[] segmentArrayUpgrade = segmentHelper.addItemonSlot(segmentConveyor, itemList.get(j));
+                Slot[] segmentArrayUpgrade = segmentHelper.addItemOnSlot(segmentConveyor, itemList.get(j));
                 logger.info("Item added on segment");
                 segmentHelper.shiftItemsOnSlot(segmentArrayUpgrade);
                 logger.info("All item shift to right");
@@ -84,9 +84,11 @@ public final class Simulator {
                 Stream<Slot> slotStreamUpgrade = Arrays.stream(segmentArrayUpgrade);
                 slotStreamUpgrade.forEach(slot -> System.out.println(slot));
 
-                if(segmentArrayUpgrade[j+1] == node)
+                if(segmentArrayUpgrade[j+1] == node){
                     logger.info("Caution, next slot is a Node....");
-                    nodeHelper.sensorItemProximity(listofFork, itemList.get(j));
+                    nodeHelper.sensorItemProximity(listOfFork, itemList.get(j));
+                    logger.debug("Item are passed the fork-node and it pushed in the right way.... ");
+                }
 
 
             }
@@ -117,11 +119,11 @@ public final class Simulator {
     }
 
 
-    public  List<ArrayList<Slot>> createFork(int count){     //FIXME method for create exit segment after fork
+    public  ArrayList<Slot> createFork(int count){     //FIXME method for create exit segment after fork
         int size =0;
-        List<ArrayList<Slot>> listOfFork = new ArrayList<>();
+        ArrayList<Slot> listOfFork = new ArrayList<>();
         while(size<count){
-            listOfFork.add(new ArrayList<>());
+            listOfFork.add(new Slot());
             size += 1;
         }
         return listOfFork;

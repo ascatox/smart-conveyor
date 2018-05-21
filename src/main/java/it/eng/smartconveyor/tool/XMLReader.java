@@ -51,11 +51,13 @@ public class XMLReader {
     }
 
 
-    public int searchItemRoute(String itemID) { //TODO
+    public int searchItemRoute(Item item, Map<Item, ArrayList<Node>> dispatchPlan) { //TODO
 
-        int numberOfRoute = 0;
-        return numberOfRoute;
-    }
+        ArrayList<Node> nodeArrayList = dispatchPlan.get(item);
+        Node node = nodeArrayList.get(1);
+        return  node.getId();
+        }
+
 
     public int counterForkFromXML() {//FIXME
         int count=0;
