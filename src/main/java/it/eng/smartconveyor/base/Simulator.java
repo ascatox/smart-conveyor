@@ -1,5 +1,6 @@
 package it.eng.smartconveyor.base;
 
+import it.eng.smartconveyor.config.Constants;
 import it.eng.smartconveyor.exception.ConveyorHubException;
 import it.eng.smartconveyor.helper.HandlerHelper;
 import it.eng.smartconveyor.helper.NodeHelper;
@@ -8,6 +9,7 @@ import it.eng.smartconveyor.model.*;
 import it.eng.smartconveyor.tool.XMLReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +23,7 @@ import java.util.stream.Stream;
 
 public final class Simulator {
     private Logger logger = LogManager.getLogger(Simulator.class);
+
     private Slot slot;
     private Segment segment;
     private Node node;
@@ -28,11 +31,16 @@ public final class Simulator {
     private SegmentHelper segmentHelper;
     private NodeHelper nodeHelper;
     private HandlerHelper handlerHelper;
+
+    @Autowired
     private XMLReader xmlReader;
+    @Autowired
+    private Constants constants;
+
     private Slot[] segmentConveyor;
     private List<Slot> listOfFork;
 
-    private static final int CLOCK = 5 * 1000; //seconds
+    //private static final int CLOCK = 5 * 1000; //seconds
 
     public Simulator() {
         this(null, null, null, null);
@@ -47,7 +55,8 @@ public final class Simulator {
         this.handlerHelper = new HandlerHelper();
         this.segmentHelper = new SegmentHelper();
         this.nodeHelper = new NodeHelper();
-        this.xmlReader = new XMLReader();
+
+
     }
 
 
@@ -87,7 +96,6 @@ public final class Simulator {
                     logger.info("Slot after fork upgrade with correct item!!!");
                 }
                 //Repeat for all item in itemList!!!!
-
             }
         } catch (Exception e) {
             logger.error(e);
@@ -103,7 +111,7 @@ public final class Simulator {
                 logger.info("Simulator started at: " + System.currentTimeMillis());
                 doSimulate();
             }
-        }, CLOCK, CLOCK);
+        }, constants.getClock(), constants.getClock());
     }
 
     private void doSimulate() {

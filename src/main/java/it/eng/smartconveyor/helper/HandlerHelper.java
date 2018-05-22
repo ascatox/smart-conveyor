@@ -8,6 +8,7 @@ import it.eng.smartconveyor.model.Slot;
 import it.eng.smartconveyor.tool.XMLReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class HandlerHelper {
 
 
     SegmentHelper segmentHelper;
+    @Autowired
     XMLReader xmlReader;
     NodeHelper nodeHelper;
     Conveyor conveyor;
