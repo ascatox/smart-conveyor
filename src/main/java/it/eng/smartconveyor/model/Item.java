@@ -12,22 +12,22 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public class Item {
     @XmlAttribute
-    private String id;
+    private int id;
     @XmlAttribute
     private String type;
 
     public Item() {
     }
 
-    public Item(String id, String type) {
+    public Item(int id, String type) {
         this.id = id;
         this.type = type;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -42,7 +42,7 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", type='" + type + '\'' +
                 '}';
     }

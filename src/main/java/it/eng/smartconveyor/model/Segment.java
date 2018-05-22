@@ -7,16 +7,14 @@ public class Segment {
 
     private int lenght;
     private int direction;
-    private boolean movement;
 
     public Segment() {
         this.lenght = 20;
     }
 
-    public Segment( int direction, boolean movement) {
+    public Segment( int direction) {
         this.lenght = 20;
         this.direction = direction;
-        this.movement = movement;
     }
 
     public int getLenght() {
@@ -35,13 +33,8 @@ public class Segment {
         this.direction = direction;
     }
 
-    public boolean isMovement() {
-        return movement;
-    }
 
-    public void setMovement(boolean movement) {
-        this.movement = movement;
-    }
+
 
 
 }

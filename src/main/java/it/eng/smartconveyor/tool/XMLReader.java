@@ -25,7 +25,7 @@ public class XMLReader {
     public XMLReader() {
     }
 
-    public void readDispactPlan() throws ConveyorHubException {
+    public Map<Item, ArrayList<Node>> readDispactPlan() throws ConveyorHubException {
                                                                                             //FIXME provare con jackson!!!
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(DispatchPlan.class);
@@ -39,7 +39,9 @@ public class XMLReader {
 
             logger.info("Object DispatchPlan build on!!!");
             System.out.println(dispatchPlan);
-            formObjectToMap(dispatchPlan);
+            Map<Item, ArrayList<Node>> map = formObjectToMap(dispatchPlan);
+            return map;
+
 
         } catch (Exception e) {
             logger.error(e);

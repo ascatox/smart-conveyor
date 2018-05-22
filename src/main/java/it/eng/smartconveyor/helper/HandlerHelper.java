@@ -1,5 +1,6 @@
 package it.eng.smartconveyor.helper;
 
+import it.eng.smartconveyor.exception.ConveyorHubException;
 import it.eng.smartconveyor.model.Conveyor;
 import it.eng.smartconveyor.model.Item;
 import it.eng.smartconveyor.model.Node;
@@ -71,10 +72,10 @@ public class HandlerHelper {
         return null;
     }
 
-    public Map<Item, ArrayList<Node>> updatePlan() { //TODO
+    public Map<Item, ArrayList<Node>> updatePlan() throws ConveyorHubException { //TODO
 
-        //XMLReader.readDispactPlan();
-        return null;
+        Map<Item, ArrayList<Node>>map = xmlReader.readDispactPlan();
+        return map;
 
     }
 

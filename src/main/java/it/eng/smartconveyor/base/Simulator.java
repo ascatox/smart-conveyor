@@ -50,8 +50,9 @@ public final class Simulator {
         //init Plan
         logger.info("Simulation start!!!");
 
-        handlerHelper.updatePlan();
         xmlReader.readDispactPlan();
+       // conveyor.setDispatchPlan(handlerHelper.updatePlan());
+        logger.info("read dispatchPlan.xml and set in Conveyor!!!");
 
         //init();
         Slot[] segmentConveyor = segmentHelper.createSegmentConveyor();   //FIXME create init() to inizialize all data structure
