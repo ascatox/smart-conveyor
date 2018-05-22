@@ -6,10 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -37,10 +34,9 @@ public class XMLReader {
             InputStream resource = getClass().getResourceAsStream("/dispatchPlan.xml");
             DispatchPlan dispatchPlan = (DispatchPlan) jaxbUnmarshaller.unmarshal(resource);  //FIXME path
 
-
             logger.info("Object DispatchPlan build on!!!");
             System.out.println(dispatchPlan);
-            Map<Item, List<Node>> map = formObjectToMap(dispatchPlan);
+            Map<Item, List<Node>> map = fromObjectToMap(dispatchPlan);
             return map;
 
 
@@ -94,7 +90,7 @@ public class XMLReader {
     }
     */
 
-    private Map<Item, List<Node>> formObjectToMap(DispatchPlan dispatchPlan) {
+    private Map<Item, List<Node>> fromObjectToMap(DispatchPlan dispatchPlan) {
 
         Map<Item, List<Node>> map = new Hashtable<>();         //FIXME maybe incorrect
         for (Route route : dispatchPlan.getRoute()) {
@@ -118,9 +114,9 @@ public class XMLReader {
     }
 
 
-    public int searchItemRoute(Item item, Map<Item, ArrayList<Node>> dispatchPlan) { // metodo che estrapola la biforcazione di un Item
+    public int searchItemRoute(Item item, Map<Item, List<Node>> dispatchPlan) { // metodo che estrapola la biforcazione di un Item
 
-        ArrayList<Node> nodeArrayList = dispatchPlan.get(item);
+        List<Node> nodeArrayList = dispatchPlan.get(item);
         Node node = nodeArrayList.get(1);
         logger.info("Item route extract");
         return node.getId();

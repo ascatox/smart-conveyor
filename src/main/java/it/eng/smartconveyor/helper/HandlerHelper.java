@@ -48,7 +48,7 @@ public class HandlerHelper {
         }
     }
 
-    public Slot doRoute(boolean isItemProximity,  ArrayList<Slot> listOfFork, Item item) {
+    public Slot doRoute(boolean isItemProximity,  List<Slot> listOfFork, Item item) {
         if(isItemProximity) {
             //if (xmlReader.readDispactPlan().isEmpty()) ;
             int numberOfFork= xmlReader.searchItemRoute(item, conveyor.getDispatchPlan() );

@@ -10,7 +10,6 @@ import java.util.List;
 public class DispatchPlan {
 
     private List<Route> route;
-
     private List<Bay> bay;
 
     public DispatchPlan() {

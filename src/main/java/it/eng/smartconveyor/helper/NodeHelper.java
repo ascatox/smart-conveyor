@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NodeHelper {
     private Logger logger = LogManager.getLogger(NodeHelper.class);
@@ -27,7 +28,7 @@ public class NodeHelper {
     }
 
 
-    public Slot actuatorItemPush(ArrayList<Slot> segmentFork, int numberFork, Item item) {
+    public Slot actuatorItemPush(List<Slot> segmentFork, int numberFork, Item item) {
 
         Slot forkSlot = segmentFork.get(numberFork);
         forkSlot.setItem(item);
@@ -35,7 +36,7 @@ public class NodeHelper {
         return forkSlot;
 
     }
-    public Slot sensorItemProximity( ArrayList<Slot> listOfFork, Item item){
+    public Slot sensorItemProximity( List<Slot> listOfFork, Item item){
         logger.info("Item is near the node");
          Slot slot = handlerHelper.doRoute(true, listOfFork, item);
          return slot;
