@@ -6,18 +6,21 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 /**
  * @author ascatox
  */
 public class XMLReader {
-    private DispatchPlan dispatchPlan= new DispatchPlan();
+    private DispatchPlan dispatchPlan = new DispatchPlan();
 
     private Logger logger = LogManager.getLogger(XMLReader.class);
 
@@ -25,21 +28,19 @@ public class XMLReader {
     public XMLReader() {
     }
 
-    public Map<Item, ArrayList<Node>> readDispactPlan() throws ConveyorHubException {
-                                                                                            //FIXME provare con jackson!!!
+    public Map<Item, List<Node>> readDispactPlan() throws ConveyorHubException {
+        //FIXME provare con jackson!!!
+       // writeDispatchPlan();
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(DispatchPlan.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            DispatchPlan dispatchPlan = (DispatchPlan) jaxbUnmarshaller.unmarshal(new File("/home/claudio/IdeaProjects/smart-conveyor/src/main/resources/dispatchPlan.xml"));  //FIXME path
-
-            /*Marshaller marshaller = jaxbContext.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.marshal(dispatchPlan, System.out);*/
+            InputStream resource = getClass().getResourceAsStream("/dispatchPlan.xml");
+            DispatchPlan dispatchPlan = (DispatchPlan) jaxbUnmarshaller.unmarshal(resource);  //FIXME path
 
 
             logger.info("Object DispatchPlan build on!!!");
             System.out.println(dispatchPlan);
-            Map<Item, ArrayList<Node>> map = formObjectToMap(dispatchPlan);
+            Map<Item, List<Node>> map = formObjectToMap(dispatchPlan);
             return map;
 
 
@@ -49,14 +50,57 @@ public class XMLReader {
         }
     }
 
-    private Map<Item, ArrayList<Node>> formObjectToMap(DispatchPlan dispatchPlan) {
 
-        Map<Item, ArrayList<Node>> map = new Hashtable<>();         //FIXME maybe incorrect
-        for (Route route : dispatchPlan.getRoute()) {
-            Item item = route.getItem().get(0);
-            map.put(item, route.getNode());
+    /*private void writeDispatchPlan() {
+        JAXBContext jaxbContext = null;
+        DispatchPlan dispatchPlan = new DispatchPlan();
+        Route route = new Route();
+        Item item = new Item();
+        item.setId(1);
+        item.setType("oven");
+        Item item1= new Item();
+        item1.setId(2);
+        item1.setType("fridge");
+        Node node = new Node();
+        node.setId(11);
+        node.setFork(1);
+        Node node1 = new Node();
+        node1.setId(11);
+        node1.setFork(1);
+        List nodes = new ArrayList();
+        nodes.add(node);
+        nodes.add(node1);
+        route.setNode(nodes);
+        route.setItem(item);
+        route.setItem(item1);
+        List routes = new ArrayList();
+        routes.add(route);
+        Bay bay = new Bay();
+        bay.setId(1);
+        List<Bay> bays = new ArrayList<>();
+        bays.add(bay);
+        dispatchPlan.setBay(bays);
+        dispatchPlan.setRoute(routes);
+        try {
+            jaxbContext = JAXBContext.newInstance(DispatchPlan.class);
+            Marshaller marshaller = jaxbContext.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.marshal(dispatchPlan, System.out);
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
         }
 
+    }
+    */
+
+    private Map<Item, List<Node>> formObjectToMap(DispatchPlan dispatchPlan) {
+
+        Map<Item, List<Node>> map = new Hashtable<>();         //FIXME maybe incorrect
+        for (Route route : dispatchPlan.getRoute()) {
+            Item item = route.getItem();
+            map.put(item, route.getNode());
+        }
        /* for(Map.Entry<Item, ArrayList<Node>> entry : map.entrySet()){
             for(Node node : entry.getValue()) {
                 System.out.println(node.toString());
@@ -68,7 +112,7 @@ public class XMLReader {
             System.out.println(entry.getKey() + ":" + entry.getValue().toString());
         }*/
 
-        logger.info("Map are created from .xml");
+        logger.debug("Map are created from .xml");
 
         return map;
     }
@@ -79,17 +123,17 @@ public class XMLReader {
         ArrayList<Node> nodeArrayList = dispatchPlan.get(item);
         Node node = nodeArrayList.get(1);
         logger.info("Item route extract");
-        return  node.getId();
-        }
+        return node.getId();
+    }
 
 
     public int counterForkFromXML() {//FIXME
-        int count=0;
+        int count = 0;
 
-        for(Bay bay : dispatchPlan.getBay() )
+        for (Bay bay : dispatchPlan.getBay())
 
-            logger.info("Number of exit bay:" +bay);
-            count++;
+            logger.info("Number of exit bay:" + bay);
+        count++;
 
         return count;
     }

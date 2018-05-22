@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -72,9 +73,9 @@ public class HandlerHelper {
         return null;
     }
 
-    public Map<Item, ArrayList<Node>> updatePlan() throws ConveyorHubException { //TODO
+    public Map<Item, List<Node>> updatePlan() throws ConveyorHubException { //TODO
 
-        Map<Item, ArrayList<Node>>map = xmlReader.readDispactPlan();
+        Map<Item, List<Node>>map = xmlReader.readDispactPlan();
         return map;
 
     }

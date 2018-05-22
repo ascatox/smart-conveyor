@@ -4,41 +4,35 @@ import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 @XmlRootElement
-@XmlAccessorType (XmlAccessType.NONE)
 public class DispatchPlan {
 
-    @XmlElement(name="route")
-    private Collection<Route> route;
+    private List<Route> route;
 
-    @XmlElement(name="bay")
-    private Collection<Bay> bay;
+    private List<Bay> bay;
 
     public DispatchPlan() {
-        this.route = new ArrayList<>();
-        this.bay = new LinkedList<>();
     }
 
-    public DispatchPlan(Collection<Route> routes, LinkedList<String> bayList) {
-        this.route = new ArrayList<>();
-        this.bay = new LinkedList<>();
-    }
-
-
-    public Collection<Route> getRoute() {
+    @XmlElementWrapper(name = "routes")
+    @XmlElement
+    public List<Route> getRoute() {
         return route;
     }
 
-    public void setRoute(Collection<Route> route) {
+    public void setRoute(List<Route> route) {
         this.route = route;
     }
 
-    public Collection<Bay> getBay() {
+    @XmlElementWrapper(name = "bays")
+    @XmlElement
+    public List<Bay> getBay() {
         return bay;
     }
 
-    public void setBay(Collection<Bay> bay) {
+    public void setBay(List<Bay> bay) {
         this.bay = bay;
     }
 

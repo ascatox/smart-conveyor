@@ -9,11 +9,8 @@ import javax.xml.bind.annotation.XmlElement;
  * @author clod16
 
  */
-@XmlAccessorType(XmlAccessType.NONE)
 public class Item {
-    @XmlAttribute
     private int id;
-    @XmlAttribute
     private String type;
 
     public Item() {
@@ -23,14 +20,16 @@ public class Item {
         this.id = id;
         this.type = type;
     }
-
+    @XmlAttribute
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
 
+    @XmlAttribute
     public String getType() {
         return type;
     }

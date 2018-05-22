@@ -6,16 +6,11 @@ import javax.xml.bind.annotation.*;
  * @author clod16
 
  */
-@XmlAccessorType(XmlAccessType.NONE)
 public class Node extends Slot {
-    @XmlAttribute
-    private int id;
-    @XmlAttribute
-    private int fork;
 
-    @XmlTransient
+    private int id;
+    private int fork;
     private Sensor sensor;
-    @XmlTransient
     private Actuator actuator;
 
 
@@ -29,6 +24,7 @@ public class Node extends Slot {
         this.fork = fork;
     }
 
+    @XmlAttribute
     public int getId() {
         return id;
     }
@@ -36,10 +32,12 @@ public class Node extends Slot {
         this.id = id;
     }
 
+    @XmlTransient
     public Sensor getSensor() {
         return sensor;
     }
 
+    @XmlAttribute
     public int isFork() {
         return fork;
     }
@@ -51,6 +49,7 @@ public class Node extends Slot {
         this.sensor = sensor;
     }
 
+    @XmlTransient
     public Actuator getActuator() {
         return actuator;
     }

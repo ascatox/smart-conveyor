@@ -1,11 +1,12 @@
 package it.eng.smartconveyor.model;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  * @author clod16
-
  */
 
- public class Slot {
+public class Slot {
 
     private int positionItem;
     Item item;
@@ -17,7 +18,7 @@ package it.eng.smartconveyor.model;
         this.positionItem = positionItem;
         this.item = item;
     }
-
+    @XmlTransient
     public int getPositionItem() {
         return positionItem;
     }
