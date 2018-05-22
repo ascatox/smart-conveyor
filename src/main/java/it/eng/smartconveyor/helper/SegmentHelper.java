@@ -18,6 +18,13 @@ public class SegmentHelper {
     public SegmentHelper() {
     }
 
+    public SegmentHelper(Item item, Conveyor conveyor, Segment segment, Logger logger) {
+        this.item = item;
+        this.conveyor = conveyor;
+        this.segment = segment;
+        this.logger = logger;
+    }
+
     public Slot[] createSegmentConveyor() {
 
         int lenght = segment.getLenght();
@@ -43,7 +50,7 @@ public class SegmentHelper {
                 logger.error("end of array, overflow error ");
                 break;
             }
-            slot.setItem(item);//FIXME indice
+            slot.setItem(item);
             segmentArray[i]= slot;
             logger.info("item add on slot");
             shiftItemsOnSlot(segmentArray);

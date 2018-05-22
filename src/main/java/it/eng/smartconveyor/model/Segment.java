@@ -10,10 +10,11 @@ public class Segment {
     private boolean movement;
 
     public Segment() {
+        this.lenght = 20;
     }
 
-    public Segment(int lenght, int direction, boolean movement) {
-        this.lenght = lenght;
+    public Segment( int direction, boolean movement) {
+        this.lenght = 20;
         this.direction = direction;
         this.movement = movement;
     }

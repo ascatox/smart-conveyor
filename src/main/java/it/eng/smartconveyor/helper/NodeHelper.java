@@ -15,8 +15,15 @@ public class NodeHelper {
     private Node node;
     HandlerHelper handlerHelper;
 
+    public NodeHelper(Logger logger, Sensor sensor, Actuator actuator, Node node, HandlerHelper handlerHelper) {
+        this.logger = logger;
+        this.sensor = sensor;
+        this.actuator = actuator;
+        this.node = node;
+        this.handlerHelper = handlerHelper;
+    }
+
     public NodeHelper() {
-        handlerHelper = new HandlerHelper();
     }
 
 

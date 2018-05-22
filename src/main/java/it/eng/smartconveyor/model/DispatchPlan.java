@@ -1,4 +1,4 @@
-package it.eng.smartconveyor.tool;
+package it.eng.smartconveyor.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,5 +37,13 @@ public class DispatchPlan {
     @XmlElement
     public void setBay(Collection<String> bay) {
         this.bay = bay;
+    }
+
+    @Override
+    public String toString() {
+        return "DispatchPlan{" +
+                "routes=" + routes +
+                ", bay=" + bay +
+                '}';
     }
 }

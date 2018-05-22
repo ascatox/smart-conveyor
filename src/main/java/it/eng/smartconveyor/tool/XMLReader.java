@@ -1,8 +1,10 @@
 package it.eng.smartconveyor.tool;
 
 import it.eng.smartconveyor.exception.ConveyorHubException;
+import it.eng.smartconveyor.model.DispatchPlan;
 import it.eng.smartconveyor.model.Item;
 import it.eng.smartconveyor.model.Node;
+import it.eng.smartconveyor.model.Route;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,12 +28,13 @@ public class XMLReader {
     }
 
     public void readDispactPlan() throws ConveyorHubException {
-
+                                                                                            //FIXME provare cn jackson!!!
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(DispatchPlan.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            DispatchPlan dispatchPlan = (DispatchPlan) jaxbUnmarshaller.unmarshal(new File("dispatchPlan.xml"));  //FIXME path of .xml file
-            logger.info("Object Dispatchplan build on!!!");
+            DispatchPlan dispatchPlan = (DispatchPlan) jaxbUnmarshaller.unmarshal(new File("/home/claudio/IdeaProjects/smart-conveyor/src/main/resources/dispatchPlan.xml"));  //FIXME path
+            logger.info("Object DispatchPlan build on!!!");
+            System.out.println(dispatchPlan);
             formObjectToMap(dispatchPlan);
 
         } catch (Exception e) {
@@ -42,17 +45,30 @@ public class XMLReader {
 
     private Map<Item, ArrayList<Node>> formObjectToMap(DispatchPlan dispatchPlan) {
 
-        Map<Item, ArrayList<Node>> map = new Hashtable<>();
+        Map<Item, ArrayList<Node>> map = new Hashtable<>();         //FIXME maybe incorrect
         for (Route route : dispatchPlan.getRoutes()) {
             Item item = route.getItem().get(0);
             map.put(item, route.getNode());
         }
+
+       /* for(Map.Entry<Item, ArrayList<Node>> entry : map.entrySet()){
+            for(Node node : entry.getValue()) {
+                System.out.println(node.toString());
+            } }
+
+        map.forEach((key, value) -> System.out.println(key + ":" + value));
+
+        for (Map.Entry<Item, ArrayList<Node>> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ":" + entry.getValue().toString());
+        }*/
+
         logger.info("Map are created from .xml");
+
         return map;
     }
 
 
-    public int searchItemRoute(Item item, Map<Item, ArrayList<Node>> dispatchPlan) { //FIXME metodo che estrapola la strada da percorrere dato un Item
+    public int searchItemRoute(Item item, Map<Item, ArrayList<Node>> dispatchPlan) { // metodo che estrapola la biforcazione di un Item
 
         ArrayList<Node> nodeArrayList = dispatchPlan.get(item);
         Node node = nodeArrayList.get(1);

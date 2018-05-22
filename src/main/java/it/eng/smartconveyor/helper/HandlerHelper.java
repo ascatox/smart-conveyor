@@ -24,12 +24,16 @@ public class HandlerHelper {
     NodeHelper nodeHelper;
     Conveyor conveyor;
 
+    public HandlerHelper(Logger logger, SegmentHelper segmentHelper, XMLReader xmlReader, NodeHelper nodeHelper, Conveyor conveyor) {
+        this.logger = logger;
+        this.segmentHelper = segmentHelper;
+        this.xmlReader = xmlReader;
+        this.nodeHelper = nodeHelper;
+        this.conveyor = conveyor;
+    }
 
     public HandlerHelper() {
-        this.segmentHelper= new SegmentHelper();
-        this.xmlReader= new XMLReader();
-        this.nodeHelper = new NodeHelper();
-        this.conveyor = new Conveyor();
+
     }
 
 
@@ -46,7 +50,7 @@ public class HandlerHelper {
         if(isItemProximity) {
             //if (xmlReader.readDispactPlan().isEmpty()) ;
             int numberOfFork= xmlReader.searchItemRoute(item, conveyor.getDispatchPlan() );
-            logger.info("Route of Item found.....");
+            logger.info("Item's route found.....");
 
             Slot slot =nodeHelper.actuatorItemPush(listOfFork, numberOfFork, item);
             logger.info("Item push on fork number:" +numberOfFork);
@@ -68,6 +72,7 @@ public class HandlerHelper {
     }
 
     public Map<Item, ArrayList<Node>> updatePlan() { //TODO
+
         //XMLReader.readDispactPlan();
         return null;
 

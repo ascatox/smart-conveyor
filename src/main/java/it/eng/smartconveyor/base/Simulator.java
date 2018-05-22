@@ -56,7 +56,8 @@ public final class Simulator {
         //init();
         Slot[] segmentConveyor = segmentHelper.createSegmentConveyor();   //FIXME create init() to inizialize all data structure
         int sizeArray = segmentConveyor.length;
-        segmentConveyor[0] = node;
+
+        segmentConveyor[0] = node;              //FIXME nodi segmento
         segmentConveyor[sizeArray]= node;
 
         int count = xmlReader.counterForkFromXML();    //counter for daily fork
@@ -64,6 +65,7 @@ public final class Simulator {
         logger.info("Segment created... \n Node created... \n SegmentFork created");
 
         instantiateTimer();
+
         try {
             List<Item> itemList = new ArrayList<>();
             for (Item key : conveyor.getDispatchPlan().keySet())   //extract all  daily item
