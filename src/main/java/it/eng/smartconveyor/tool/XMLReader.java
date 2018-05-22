@@ -1,14 +1,12 @@
 package it.eng.smartconveyor.tool;
 
 import it.eng.smartconveyor.exception.ConveyorHubException;
-import it.eng.smartconveyor.model.DispatchPlan;
-import it.eng.smartconveyor.model.Item;
-import it.eng.smartconveyor.model.Node;
-import it.eng.smartconveyor.model.Route;
+import it.eng.smartconveyor.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
@@ -28,11 +26,17 @@ public class XMLReader {
     }
 
     public void readDispactPlan() throws ConveyorHubException {
-                                                                                            //FIXME provare cn jackson!!!
+                                                                                            //FIXME provare con jackson!!!
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(DispatchPlan.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             DispatchPlan dispatchPlan = (DispatchPlan) jaxbUnmarshaller.unmarshal(new File("/home/claudio/IdeaProjects/smart-conveyor/src/main/resources/dispatchPlan.xml"));  //FIXME path
+
+            /*Marshaller marshaller = jaxbContext.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.marshal(dispatchPlan, System.out);*/
+
+
             logger.info("Object DispatchPlan build on!!!");
             System.out.println(dispatchPlan);
             formObjectToMap(dispatchPlan);
@@ -46,7 +50,7 @@ public class XMLReader {
     private Map<Item, ArrayList<Node>> formObjectToMap(DispatchPlan dispatchPlan) {
 
         Map<Item, ArrayList<Node>> map = new Hashtable<>();         //FIXME maybe incorrect
-        for (Route route : dispatchPlan.getRoutes()) {
+        for (Route route : dispatchPlan.getRoute()) {
             Item item = route.getItem().get(0);
             map.put(item, route.getNode());
         }
@@ -80,7 +84,7 @@ public class XMLReader {
     public int counterForkFromXML() {//FIXME
         int count=0;
 
-        for(String bay : dispatchPlan.getBay() )
+        for(Bay bay : dispatchPlan.getBay() )
 
             logger.info("Number of exit bay:" +bay);
             count++;

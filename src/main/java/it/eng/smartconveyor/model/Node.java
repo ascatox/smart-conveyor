@@ -1,17 +1,21 @@
 package it.eng.smartconveyor.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * @author clod16
 
  */
-
+@XmlAccessorType(XmlAccessType.NONE)
 public class Node extends Slot {
-
+    @XmlAttribute
     private int id;
     private Sensor sensor;
     private Actuator actuator;
+    @XmlAttribute
     private int fork;
 
     public Node() {
@@ -27,7 +31,6 @@ public class Node extends Slot {
     public int getId() {
         return id;
     }
-    @XmlAttribute
     public void setId(int id) {
         this.id = id;
     }
@@ -39,7 +42,6 @@ public class Node extends Slot {
     public int isFork() {
         return fork;
     }
-    @XmlAttribute
     public void setFork(int fork) {
         this.fork = fork;
     }
@@ -56,4 +58,13 @@ public class Node extends Slot {
         this.actuator = actuator;
     }
 
+    @Override
+    public String toString() {
+        return "Node{" +
+                "id=" + id +
+                ", sensor=" + sensor +
+                ", actuator=" + actuator +
+                ", fork=" + fork +
+                '}';
+    }
 }

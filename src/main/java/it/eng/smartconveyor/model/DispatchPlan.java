@@ -1,48 +1,51 @@
 package it.eng.smartconveyor.model;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
 @XmlRootElement
+@XmlAccessorType (XmlAccessType.NONE)
 public class DispatchPlan {
 
-    private Collection<Route> routes;
-    private Collection<String> bay;
+    @XmlElement(name="route")
+    private Collection<Route> route;
+
+    @XmlElement(name="bay")
+    private Collection<Bay> bay;
 
     public DispatchPlan() {
-        this.routes = new ArrayList<>();
+        this.route = new ArrayList<>();
         this.bay = new LinkedList<>();
     }
 
     public DispatchPlan(Collection<Route> routes, LinkedList<String> bayList) {
-        this.routes = new ArrayList<>();
+        this.route = new ArrayList<>();
         this.bay = new LinkedList<>();
     }
 
 
-    public Collection<Route> getRoutes() {
-        return routes;
-    }
-    @XmlElement
-    public void setRoutes(Collection<Route> routes) {
-        this.routes = routes;
+    public Collection<Route> getRoute() {
+        return route;
     }
 
-    public Collection<String> getBay() {
+    public void setRoute(Collection<Route> route) {
+        this.route = route;
+    }
+
+    public Collection<Bay> getBay() {
         return bay;
     }
-    @XmlElement
-    public void setBay(Collection<String> bay) {
+
+    public void setBay(Collection<Bay> bay) {
         this.bay = bay;
     }
 
     @Override
     public String toString() {
         return "DispatchPlan{" +
-                "routes=" + routes +
+                "route=" + route +
                 ", bay=" + bay +
                 '}';
     }

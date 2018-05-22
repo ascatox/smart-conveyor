@@ -58,11 +58,11 @@ public final class Simulator {
         int sizeArray = segmentConveyor.length;
 
         segmentConveyor[0] = node;              //FIXME nodi segmento
-        segmentConveyor[sizeArray]= node;
+        segmentConveyor[sizeArray-1]= node;
 
         int count = xmlReader.counterForkFromXML();    //counter for daily fork
         ArrayList<Slot> listOfFork= createFork(count);   //create fork
-        logger.info("Segment created... \n Node created... \n SegmentFork created");
+        logger.info("Segment created...  Node created... SegmentFork created");
 
         instantiateTimer();
 
