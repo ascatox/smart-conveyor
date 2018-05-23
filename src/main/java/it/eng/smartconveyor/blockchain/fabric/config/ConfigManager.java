@@ -1,7 +1,7 @@
 package it.eng.smartconveyor.blockchain.fabric.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.eng.productunithubledgerclient.exception.ProductUnitHubException;
+import it.eng.smartconveyor.exception.ConveyorHubException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
@@ -34,7 +34,7 @@ public class ConfigManager {
         return this.configuration;
     }
 
-    public static ConfigManager getInstance() throws ProductUnitHubException, InvalidArgumentException {
+    public static ConfigManager getInstance() throws ConveyorHubException, InvalidArgumentException {
         if (ourInstance == null) { //1
             synchronized (ConfigManager.class) {
                 if (ourInstance == null) {  //2

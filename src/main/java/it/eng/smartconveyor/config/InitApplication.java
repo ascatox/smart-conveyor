@@ -3,7 +3,7 @@ package it.eng.smartconveyor.config;
 import it.eng.smartconveyor.base.Simulator;
 import it.eng.smartconveyor.exception.ConveyorHubException;
 import it.eng.smartconveyor.helper.HandlerHelper;
-import it.eng.smartconveyor.helper.NodeHelper;
+import it.eng.smartconveyor.helper.SlotHelper;
 import it.eng.smartconveyor.helper.SegmentHelper;
 import it.eng.smartconveyor.model.Conveyor;
 import it.eng.smartconveyor.tool.XMLReader;
@@ -34,8 +34,8 @@ public class InitApplication {
     }
 
     @Bean
-    public NodeHelper createNodeHelper() {
-        return new NodeHelper();
+    public SlotHelper createNodeHelper() {
+        return new SlotHelper();
     }
 
     @Bean

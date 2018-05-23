@@ -1,10 +1,11 @@
 package it.eng.smartconveyor.blockchain.fabric.helper;
 
-import it.eng.productunithubledgerclient.exception.ProductUnitHubException;
-import it.eng.productunithubledgerclient.fabric.config.ConfigManager;
-import it.eng.productunithubledgerclient.fabric.config.OrdererConfig;
-import it.eng.productunithubledgerclient.fabric.config.Organization;
-import it.eng.productunithubledgerclient.fabric.config.PeerConfig;
+
+import it.eng.smartconveyor.blockchain.fabric.config.ConfigManager;
+import it.eng.smartconveyor.blockchain.fabric.config.OrdererConfig;
+import it.eng.smartconveyor.blockchain.fabric.config.Organization;
+import it.eng.smartconveyor.blockchain.fabric.config.PeerConfig;
+import it.eng.smartconveyor.exception.ConveyorHubException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hyperledger.fabric.sdk.Channel;
@@ -35,7 +36,7 @@ public class ChannelInitializationManager {
      */
     private static ChannelInitializationManager ourInstance;
 
-    public static ChannelInitializationManager getInstance(HFClient client, ConfigManager configManager, Organization organization) throws ProductUnitHubException, InvalidArgumentException {
+    public static ChannelInitializationManager getInstance(HFClient client, ConfigManager configManager, Organization organization) throws ConveyorHubException, InvalidArgumentException {
         if (ourInstance == null || !ourInstance.organization.equals(organization)) { //1
             synchronized (ChannelInitializationManager.class) {
                 if (ourInstance == null) {  //2
@@ -47,11 +48,11 @@ public class ChannelInitializationManager {
     }
 
 
-    private ChannelInitializationManager(HFClient client, ConfigManager configManager, Organization organization) throws ProductUnitHubException, InvalidArgumentException {
+    private ChannelInitializationManager(HFClient client, ConfigManager configManager, Organization organization) throws ConveyorHubException, InvalidArgumentException {
         initializeChannel(client, configManager, organization);
     }
 
-    private void setupEnv(HFClient client, ConfigManager configManager, Organization organization) throws InvalidArgumentException, ProductUnitHubException {
+    private void setupEnv(HFClient client, ConfigManager configManager, Organization organization) throws InvalidArgumentException, ConveyorHubException {
         this.client = client;
         this.configManager = configManager;
         this.organization = organization;
@@ -65,7 +66,7 @@ public class ChannelInitializationManager {
         }
     }
 
-    private void initializeChannel(HFClient client, ConfigManager configManager, Organization organization) throws ProductUnitHubException, InvalidArgumentException {
+    private void initializeChannel(HFClient client, ConfigManager configManager, Organization organization) throws ConveyorHubException, InvalidArgumentException {
         ////////////////////////////
         //Initialize the channel
         //
@@ -84,7 +85,7 @@ public class ChannelInitializationManager {
             log.debug("Finished initialization channel java structures %s", channel.getName());
         } catch (InvalidArgumentException | TransactionException e) {
             log.error(e);
-            throw new ProductUnitHubException(e);
+            throw new ConveyorHubException(e);
         }
 
     }

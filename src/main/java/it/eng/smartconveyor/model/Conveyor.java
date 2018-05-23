@@ -10,26 +10,19 @@ public class Conveyor {
     final static Map<String, Slot> itemAssignmentTable = new Hashtable<>(); //
     private Map<Item, Slot> conveyorState;
 
-    private Map<Item, List<Node>> dispatchPlan;
-    private String configuration; //TODO
+    private Map<Item, Bay> dispatchPlan;
+    private String configuration;
 
     public Conveyor() {
-        this(new ArrayList<>(), new ArrayList<>(), new Hashtable<>(), new Hashtable<>(), null);
     }
 
-    public Conveyor(Collection<Segment> segmentCollection, Collection<Slot> slotCollection, Map<Item, Slot> conveyorState,Map<Item, List<Node>> dispatchPlan, String configuration) {
-        this.conveyorState = conveyorState;
-        this.dispatchPlan = dispatchPlan;
-        this.configuration = configuration;
 
+    public Segment getSegment() {
+        return segment;
     }
 
-    public String getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(String configuration) {
-        this.configuration = configuration;
+    public void setSegment(Segment segment) {
+        this.segment = segment;
     }
 
     public static Map<String, Slot> getItemAssignmentTable() {
@@ -44,12 +37,23 @@ public class Conveyor {
         this.conveyorState = conveyorState;
     }
 
-    public Map<Item, List<Node>> getDispatchPlan() {
+    public Map<Item, Bay> getDispatchPlan() {
         return dispatchPlan;
     }
 
-    public void setDispatchPlan(Map<Item, List<Node>> dispatchPlan) {
+    public void setDispatchPlan(Map<Item, Bay> dispatchPlan) {
         this.dispatchPlan = dispatchPlan;
     }
 
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
+    }
 }
+
+
+
+

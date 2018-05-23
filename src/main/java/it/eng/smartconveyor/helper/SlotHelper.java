@@ -4,26 +4,25 @@ import it.eng.smartconveyor.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class NodeHelper {
-    private Logger logger = LogManager.getLogger(NodeHelper.class);
+public class SlotHelper {
+
+    private Logger logger = LogManager.getLogger(SlotHelper.class);
 
 
-    private Node node;
+    private Slot slot;
     HandlerHelper handlerHelper;
 
-    public NodeHelper(Logger logger, Node node, HandlerHelper handlerHelper) {
-        this.logger = logger;
+    public SlotHelper() {
+    }
 
-        this.node = node;
+
+    public SlotHelper(Logger logger, Slot slot, HandlerHelper handlerHelper) {
+        this.logger = logger;
+        this.slot = slot;
         this.handlerHelper = handlerHelper;
     }
-
-    public NodeHelper() {
-    }
-
 
     public Slot actuatorItemPush(List<Slot> segmentFork, int numberFork, Item item) {
 

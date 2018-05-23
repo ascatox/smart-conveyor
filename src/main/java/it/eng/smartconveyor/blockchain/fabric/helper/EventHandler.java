@@ -1,6 +1,6 @@
 package it.eng.smartconveyor.blockchain.fabric.helper;
 
-import it.eng.productunithubledgerclient.exception.ProductUnitHubException;
+import it.eng.smartconveyor.exception.ConveyorHubException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,7 +23,7 @@ public class EventHandler {
 
     private static EventHandler ourInstance;
 
-    public static EventHandler getInstance() throws ProductUnitHubException, InvalidArgumentException {
+    public static EventHandler getInstance() throws ConveyorHubException, InvalidArgumentException {
         if (ourInstance == null || ourInstance.chaincodeEventListenerHandle == null) { //1
             synchronized (EventHandler.class) {
                 if (ourInstance == null) {  //2

@@ -14,11 +14,9 @@
  *
  */
 
-package it.eng.smartconveyor.blockchain.productunithubledgerclient.utils;
 
 
-import it.eng.productunithubledgerclient.exception.ProductUnitHubException;
-import it.eng.productunithubledgerclient.model.ChassisDTO;
+import it.eng.smartconveyor.exception.ConveyorHubException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -46,7 +44,7 @@ public class Utils {
     private final static Logger logger = LogManager.getLogger(Utils.class);
 
 
-    public static void getMessageViolations(Set<ConstraintViolation<ChassisDTO>> violations) throws ProductUnitHubException {
+    public static void getMessageViolations(Set<ConstraintViolation<ChassisDTO>> violations) throws ConveyorHubException {
         if (violations.isEmpty())
             return ;
         StringBuilder messageBuilder = new StringBuilder();
@@ -54,7 +52,7 @@ public class Utils {
             messageBuilder.append(violation.getMessage());
         }
         if (StringUtils.isNotEmpty(messageBuilder.toString()))
-            throw new ProductUnitHubException(messageBuilder.toString());
+            throw new ConveyorHubException(messageBuilder.toString());
     }
 
     public static File findFileSk(String domainName, String user, String cryptoDir) {

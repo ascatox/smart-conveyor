@@ -1,7 +1,7 @@
 package it.eng.smartconveyor.blockchain.base;
 
-import it.eng.productunithubledgerclient.exception.ProductUnitHubException;
-import it.eng.productunithubledgerclient.fabric.FabricLedgerClient;
+
+import it.eng.smartconveyor.blockchain.fabric.FabricLedgerClient;
 import it.eng.smartconveyor.exception.ConveyorHubException;
 
 import java.util.Properties;

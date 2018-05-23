@@ -3,7 +3,7 @@ package it.eng.smartconveyor.base;
 import it.eng.smartconveyor.config.Constants;
 import it.eng.smartconveyor.exception.ConveyorHubException;
 import it.eng.smartconveyor.helper.HandlerHelper;
-import it.eng.smartconveyor.helper.NodeHelper;
+import it.eng.smartconveyor.helper.SlotHelper;
 import it.eng.smartconveyor.helper.SegmentHelper;
 import it.eng.smartconveyor.model.*;
 import it.eng.smartconveyor.tool.XMLReader;
@@ -32,7 +32,7 @@ public final class Simulator {
     @Autowired
     private SegmentHelper segmentHelper;
     @Autowired
-    private NodeHelper nodeHelper;
+    private SlotHelper nodeHelper;
     @Autowired
     private HandlerHelper handlerHelper;
     @Autowired
@@ -56,7 +56,7 @@ public final class Simulator {
         this.conveyor = conveyor;
         this.handlerHelper = new HandlerHelper();
         this.segmentHelper = new SegmentHelper();
-        this.nodeHelper = new NodeHelper();
+        this.nodeHelper = new SlotHelper();
     }
 
 

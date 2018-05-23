@@ -1,7 +1,8 @@
 package it.eng.smartconveyor.blockchain.fabric.helper;
 
-import it.eng.productunithubledgerclient.exception.ProductUnitHubException;
-import it.eng.productunithubledgerclient.fabric.config.*;
+import it.eng.smartconveyor.blockchain.fabric.config.*;
+import it.eng.smartconveyor.exception.ConveyorHubException;
+import it.eng.smartconveyor.model.Conveyor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hyperledger.fabric.protos.peer.Query;
@@ -12,6 +13,8 @@ import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
 
 import java.util.*;
+
+import static java.lang.String.format;
 
 /**
  * @author ascatox
@@ -30,12 +33,12 @@ final public class LedgerInteractionHelper {
 
     //File sampleStoreFile = new File(System.getProperty("java.io.tmpdir") + "/HFCSampletest.properties"); //FIXME
 
-    public LedgerInteractionHelper(ConfigManager configManager, Organization organization) throws ProductUnitHubException {
+    public LedgerInteractionHelper(ConfigManager configManager, Organization organization) throws ConveyorHubException {
         this(configManager, organization, null);
 
     }
 
-    public LedgerInteractionHelper(ConfigManager configManager, Organization organization, String userName) throws ProductUnitHubException {
+    public LedgerInteractionHelper(ConfigManager configManager, Organization organization, String userName) throws ConveyorHubException {
         try {
             //Create instance of client.
             client = HFClient.createNewInstance();
@@ -48,7 +51,7 @@ final public class LedgerInteractionHelper {
             setup();
         } catch (Exception e) {
             log.error(e);
-            throw new ProductUnitHubException(e);
+            throw new ConveyorHubException(e);
         }
     }
 
@@ -57,7 +60,7 @@ final public class LedgerInteractionHelper {
         Channel channel = channelInitializationManager.getChannel();
         if (null == channel || !channel.isInitialized() || channel.isShutdown()) {
             log.error("Channel is not initialized");
-            throw new ProductUnitHubException("Channel is not initialized");
+            throw new ConveyorHubException("Channel is not initialized");
         }
         this.channel = channel;
         //FIXME EventHandling
@@ -68,23 +71,23 @@ final public class LedgerInteractionHelper {
         this.controlInstantiatedChaincodeOnPeers(configuration.getChaincode());
     }
 
-    public void controlInstalledChaincodeOnPeers(Chaincode chaincode) throws ProductUnitHubException {
+    public void controlInstalledChaincodeOnPeers(Chaincode chaincode) throws ConveyorHubException {
         log.debug("Checking installed chaincode on all peer: %s, at version: %s, on peer: %s", chaincode.getName(), chaincode.getVersion(), channel.getPeers());
         for (Peer peer : channel.getPeers()) {
             try {
                 if (!checkInstalledChaincode(peer, chaincode)) {
-                    throw new ProductUnitHubException(format("Peer %s is missing chaincode whith name: %s, path: %s, version: %s",
+                    throw new ConveyorHubException(format("Peer %s is missing chaincode whith name: %s, path: %s, version: %s",
                             peer.getName(), chaincode.getName(), chaincode.getPath(), chaincode.getVersion()));
                 }
-            } catch (ProductUnitHubException e) {
+            } catch (ConveyorHubException e) {
                 log.error(e);
-                throw new ProductUnitHubException(format("Peer %s is missing chaincode whith name: %s, path: %s, version: %s",
+                throw new ConveyorHubException(format("Peer %s is missing chaincode whith name: %s, path: %s, version: %s",
                         peer.getName(), chaincode.getName(), chaincode.getPath(), chaincode.getVersion()));
             }
         }
     }
 
-    private boolean checkInstalledChaincode(Peer peer, Chaincode chaincode) throws ProductUnitHubException {
+    private boolean checkInstalledChaincode(Peer peer, Chaincode chaincode) throws ConveyorHubException {
         log.debug("Checking installed chaincode: %s, at version: %s, on peer: %s", chaincode.getName(), chaincode.getVersion(), peer.getName());
         boolean found = false;
         try {
@@ -104,28 +107,28 @@ final public class LedgerInteractionHelper {
             }
         } catch (InvalidArgumentException | ProposalException e) {
             log.error(e);
-            throw new ProductUnitHubException(e);
+            throw new ConveyorHubException(e);
         }
         return found;
     }
 
-    public void controlInstantiatedChaincodeOnPeers(Chaincode chaincode) throws ProductUnitHubException {
+    public void controlInstantiatedChaincodeOnPeers(Chaincode chaincode) throws ConveyorHubException {
         log.debug("Checking installed chaincode on all peer: %s, at version: %s, on peer: %s", chaincode.getName(), chaincode.getVersion(), channel.getPeers());
         for (Peer peer : channel.getPeers()) {
             if (!checkInstantiatedChaincode(peer, chaincode)) {
                 try {
-                    throw new ProductUnitHubException(format("Peer %s has not installed chaincode with name: %s, path: %s, version: %s",
+                    throw new ConveyorHubException(format("Peer %s has not installed chaincode with name: %s, path: %s, version: %s",
                             peer.getName(), chaincode.getName(), chaincode.getPath(), chaincode.getVersion()));
-                } catch (ProductUnitHubException e) {
+                } catch (ConveyorHubException e) {
                     log.error(e);
-                    throw new ProductUnitHubException(format("Peer %s has not installed chaincode with name: %s, path: %s, version: %s",
+                    throw new ConveyorHubException(format("Peer %s has not installed chaincode with name: %s, path: %s, version: %s",
                             peer.getName(), chaincode.getName(), chaincode.getPath(), chaincode.getVersion()));
                 }
             }
         }
     }
 
-    private boolean checkInstantiatedChaincode(Peer peer, Chaincode chaincode) throws ProductUnitHubException {
+    private boolean checkInstantiatedChaincode(Peer peer, Chaincode chaincode) throws ConveyorHubException {
         log.debug("Checking instantiated chaincode: %s, at version: %s, on peer: %s", chaincode.getName(), chaincode.getVersion(), peer.getName());
         boolean found = false;
         try {
@@ -147,13 +150,13 @@ final public class LedgerInteractionHelper {
             }
         } catch (InvalidArgumentException | ProposalException e) {
             log.error(e);
-            throw new ProductUnitHubException(e);
+            throw new ConveyorHubException(e);
         }
         return found;
 
     }
 
-    public InvokeReturn invokeChaincode(String functionName, List<String> args) throws ProductUnitHubException {
+    public InvokeReturn invokeChaincode(String functionName, List<String> args) throws ConveyorHubException {
         try {
             User user = organization.getLoggedUser();
             Collection<ProposalResponse> successful = new LinkedList<>();
@@ -203,13 +206,13 @@ final public class LedgerInteractionHelper {
             return new InvokeReturn(channel.sendTransaction(successful), payload);
         } catch (Exception e) {
             log.error(e);
-            throw new ProductUnitHubException(e);
+            throw new ConveyorHubException(e);
 
         }
     }
 
 
-    public List<QueryReturn> queryChainCode(String functionName, List<String> args, BlockEvent.TransactionEvent transactionEvent) throws ProductUnitHubException {
+    public List<QueryReturn> queryChainCode(String functionName, List<String> args, BlockEvent.TransactionEvent transactionEvent) throws ConveyorHubException {
         try {
             if (null != transactionEvent) {
                 //waitOnFabric(0);
@@ -257,7 +260,7 @@ final public class LedgerInteractionHelper {
             return queryReturns;
         } catch (Exception e) {
             log.error(e);
-            throw new ProductUnitHubException("Failed during chaincode query with error : " + e.getMessage());
+            throw new ConveyorHubException("Failed during chaincode query with error : " + e.getMessage());
         }
     }
 
