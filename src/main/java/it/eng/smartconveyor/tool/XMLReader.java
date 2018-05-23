@@ -17,7 +17,7 @@ import java.util.Map;
  * @author ascatox
  */
 public class XMLReader {
-    private DispatchPlan dispatchPlan = new DispatchPlan();
+    /*private DispatchPlan dispatchPlan = new DispatchPlan();
 
     private Logger logger = LogManager.getLogger(XMLReader.class);
 
@@ -44,7 +44,7 @@ public class XMLReader {
             logger.error(e);
             throw new ConveyorHubException(e);
         }
-    }
+    }*/
 
 
     /*private void writeDispatchPlan() {
@@ -90,14 +90,14 @@ public class XMLReader {
     }
     */
 
-    private Map<Item, List<Node>> fromObjectToMap(DispatchPlan dispatchPlan) {
+ /*   private Map<Item, List<Node>> fromObjectToMap(DispatchPlan dispatchPlan) {
 
         Map<Item, List<Node>> map = new Hashtable<>();         //FIXME maybe incorrect
         for (Route route : dispatchPlan.getRoute()) {
             Item item = route.getItem();
             map.put(item, route.getNode());
         }
-       /* for(Map.Entry<Item, ArrayList<Node>> entry : map.entrySet()){
+       *//* for(Map.Entry<Item, ArrayList<Node>> entry : map.entrySet()){
             for(Node node : entry.getValue()) {
                 System.out.println(node.toString());
             } }
@@ -106,7 +106,7 @@ public class XMLReader {
 
         for (Map.Entry<Item, ArrayList<Node>> entry : map.entrySet()) {
             System.out.println(entry.getKey() + ":" + entry.getValue().toString());
-        }*/
+        }*//*
 
         logger.debug("Map are created from .xml");
 
@@ -132,7 +132,7 @@ public class XMLReader {
         count++;
 
         return count;
-    }
+    }*/
 }
 
 

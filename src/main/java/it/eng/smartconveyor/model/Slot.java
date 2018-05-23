@@ -8,24 +8,28 @@ import javax.xml.bind.annotation.XmlTransient;
 
 public class Slot {
 
-    private int positionItem;
+    private int numberSlot;
     Item item;
 
     public Slot() {
     }
 
-    public Slot(int positionItem, Item item) {
-        this.positionItem = positionItem;
+    public Slot(int numberSlot, Item item) {
+        this.numberSlot = numberSlot;
         this.item = item;
     }
+
+
     @XmlTransient
-    public int getPositionItem() {
-        return positionItem;
+    public int getNumberSlot() {
+        return numberSlot;
     }
 
-    public void setPositionItem(int positionItem) {
-        this.positionItem = positionItem;
+
+    public void setNumberSlot(int numberSlot) {
+        this.numberSlot = numberSlot;
     }
+
 
     public Item getItem() {
         return item;

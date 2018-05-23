@@ -12,14 +12,25 @@ import javax.xml.bind.annotation.XmlElement;
 public class Item {
     private int id;
     private String type;
+    private Bay bay;
 
     public Item() {
     }
 
-    public Item(int id, String type) {
+    public Item(int id, String type, Bay bay) {
         this.id = id;
         this.type = type;
+        this.bay = bay;
     }
+
+    public Bay getBay() {
+        return bay;
+    }
+
+    public void setBay(Bay bay) {
+        this.bay = bay;
+    }
+
     @XmlAttribute
     public int getId() {
         return id;
@@ -38,11 +49,13 @@ public class Item {
         this.type = type;
     }
 
+
     @Override
     public String toString() {
         return "Item{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
+                ", bay=" + bay +
                 '}';
     }
 }

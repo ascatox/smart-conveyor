@@ -8,7 +8,29 @@ import javax.xml.bind.annotation.*;
  */
 public class Node extends Slot {
 
-    private int id;
+    private SegmentBay segmentBay;
+
+    public Node() {
+    }
+
+    public Node(SegmentBay segmentBay) {
+        this.segmentBay = segmentBay;
+    }
+
+    public Node(int numberSlot, Item item, SegmentBay segmentBay) {
+        super(numberSlot, item);
+        this.segmentBay = segmentBay;
+    }
+
+    public SegmentBay getSegmentBay() {
+        return segmentBay;
+    }
+
+    public void setSegmentBay(SegmentBay segmentBay) {
+        this.segmentBay = segmentBay;
+    }
+
+    /*    private int id;
     private int fork;
     private Sensor sensor;
     private Actuator actuator;
@@ -65,5 +87,5 @@ public class Node extends Slot {
                 ", actuator=" + actuator +
                 ", fork=" + fork +
                 '}';
-    }
+    }*/
 }

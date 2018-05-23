@@ -4,6 +4,9 @@ import java.util.*;
 
 public class Conveyor {
 
+    private Segment segment;
+
+
     private Collection<Segment> segmentCollection;
     private Collection<Slot> slotCollection;
 
@@ -12,7 +15,6 @@ public class Conveyor {
 
     private Map<Item, List<Node>> dispatchPlan;
     private String configuration; //TODO
-    private Collection<Route> routes;
 
     public Conveyor() {
         this(new ArrayList<>(), new ArrayList<>(), new Hashtable<>(), new Hashtable<>(), null);
@@ -25,7 +27,6 @@ public class Conveyor {
         this.dispatchPlan = dispatchPlan;
         this.configuration = configuration;
 
-        routes = new LinkedList<>();
     }
 
     public String getConfiguration() {
@@ -72,11 +73,4 @@ public class Conveyor {
         this.dispatchPlan = dispatchPlan;
     }
 
-    public Collection<Route> getRoutes() {
-        return routes;
-    }
-
-    public void setRoutes(Collection<Route> routes) {
-        this.routes = routes;
-    }
 }

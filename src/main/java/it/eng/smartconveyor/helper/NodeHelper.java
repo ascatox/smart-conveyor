@@ -11,15 +11,12 @@ public class NodeHelper {
     private Logger logger = LogManager.getLogger(NodeHelper.class);
 
 
-    private Sensor sensor;
-    private Actuator actuator;
     private Node node;
     HandlerHelper handlerHelper;
 
-    public NodeHelper(Logger logger, Sensor sensor, Actuator actuator, Node node, HandlerHelper handlerHelper) {
+    public NodeHelper(Logger logger, Node node, HandlerHelper handlerHelper) {
         this.logger = logger;
-        this.sensor = sensor;
-        this.actuator = actuator;
+
         this.node = node;
         this.handlerHelper = handlerHelper;
     }
