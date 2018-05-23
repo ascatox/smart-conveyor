@@ -8,8 +8,8 @@ import java.util.List;
  */
 public class Segment {
 
-    private int lenght;
-    List<Slot> slotList;
+    protected int lenght;
+    protected List<Slot> slotList;
 
     public Segment() {
         slotList= new ArrayList<>();

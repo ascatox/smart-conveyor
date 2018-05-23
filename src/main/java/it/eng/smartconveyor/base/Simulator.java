@@ -27,11 +27,14 @@ public final class Simulator {
     private Slot slot;
     private Segment segment;
     private Node node;
+    @Autowired
     private Conveyor conveyor;
+    @Autowired
     private SegmentHelper segmentHelper;
+    @Autowired
     private NodeHelper nodeHelper;
+    @Autowired
     private HandlerHelper handlerHelper;
-
     @Autowired
     private XMLReader xmlReader;
     @Autowired
@@ -51,16 +54,14 @@ public final class Simulator {
         this.segment = segment;
         this.node = node;
         this.conveyor = conveyor;
-
         this.handlerHelper = new HandlerHelper();
         this.segmentHelper = new SegmentHelper();
         this.nodeHelper = new NodeHelper();
-
-
     }
 
 
-    public void simulate() throws ConveyorHubException {               //TODO integrare ad ogni operazione il metodo upgradeConveyorState!!!!!!!!
+    public void simulate() throws ConveyorHubException {
+        //TODO integrare ad ogni operazione il metodo upgradeConveyorState!!!!!!!!
         //init Plan
         logger.info("Simulation start!!!");
         init();
@@ -71,27 +72,28 @@ public final class Simulator {
                 itemList.add(key);
             }
             Stream<Item> itemStream = itemList.stream();
-            logger.info("Item extract from dispatch plan :" );
-            itemStream.forEach(item -> System.out.println(item));
+            logger.info("Item extract from dispatch plan :");
+            itemStream.forEach(item -> logger.debug(item));
 
-            for (int j = 0; j < itemList.size(); j++) {             //start simulation
-                nodeHelper.sensorItemIn(itemList.get(j), segmentConveyor);  //OP1: add item in the segmentConveyor[0]
+            for (int i = 0; i < itemList.size(); i++) {
+                //start simulation
+                nodeHelper.sensorItemIn(itemList.get(i), segmentConveyor);  //OP1: add item in the segmentConveyor[0]
                 logger.info("ItemIn on Conveyor");
                 Stream<Slot> slotStream = Arrays.stream(segmentConveyor);
-                slotStream.forEach(slot -> System.out.println(slot));
-                Slot[] segmentArrayUpgrade = segmentHelper.addItemOnSlot(segmentConveyor, itemList.get(j));
+                slotStream.forEach(slot -> logger.debug(slot));
+                Slot[] segmentArrayUpgrade = segmentHelper.addItemOnSlot(segmentConveyor, itemList.get(i));
                 logger.info("Item added on segment");
                 segmentHelper.shiftItemsOnSlot(segmentArrayUpgrade);   //OP1.1: move Item of a position
                 logger.info("All item shift to right");
 
                 Stream<Slot> slotStreamUpgrade = Arrays.stream(segmentArrayUpgrade);
-                slotStreamUpgrade.forEach(slot -> System.out.println(slot));
+                slotStreamUpgrade.forEach(slot -> logger.debug(slot));
 
-                if (segmentArrayUpgrade[j + 1] == node) {
+                if (segmentArrayUpgrade[i + 1] == node) {
                     logger.info("Caution, next slot is a Node....");                  //OP2: next slot is a Node, search the right way of a Item and push it
-                    Slot slot = nodeHelper.sensorItemProximity(listOfFork, itemList.get(j));  // in the segmentFork correct!!!
+                    Slot slot = nodeHelper.sensorItemProximity(listOfFork, itemList.get(i));  // in the segmentFork correct!!!
                     logger.info("Item are passed the fork-node and it pushed in the right way.... ");
-                    int numberOfFork = xmlReader.searchItemRoute(itemList.get(j), conveyor.getDispatchPlan());
+                    int numberOfFork = xmlReader.searchItemRoute(itemList.get(i), conveyor.getDispatchPlan());
                     listOfFork.set(numberOfFork, slot);
                     logger.info("Slot after fork upgrade with correct item!!!");
                 }
@@ -135,7 +137,7 @@ public final class Simulator {
             listOfFork = createFork(count);   //create fork
             logger.info("Segment created...  Node created... SegmentFork created");
         } catch (ConveyorHubException e) {
-           throw new ConveyorHubException(e.getMessage());
+            throw new ConveyorHubException(e.getMessage());
         }
     }
 

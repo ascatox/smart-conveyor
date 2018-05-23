@@ -1,20 +1,16 @@
 package it.eng.smartconveyor.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import java.util.List;
 
 public class Bay {
 
     private int id;
-    private SegmentBay segmentBay;
-
+    private Slot slot;
+    private List<Preference> preferences;
+    private int loadFactor;
+    private int loadFactorPotential;
 
     public Bay() {
-    }
-
-
-    public Bay(int id, SegmentBay segmentBay) {
-        this.id = id;
-        this.segmentBay = segmentBay;
     }
 
     public int getId() {
@@ -25,11 +21,35 @@ public class Bay {
         this.id = id;
     }
 
-    public SegmentBay getSegmentBay() {
-        return segmentBay;
+    public Slot getSlot() {
+        return slot;
     }
 
-    public void setSegmentBay(SegmentBay segmentBay) {
-        this.segmentBay = segmentBay;
+    public void setSlot(Slot slot) {
+        this.slot = slot;
+    }
+
+    public List<Preference> getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(List<Preference> preferences) {
+        this.preferences = preferences;
+    }
+
+    public int getLoadFactor() {
+        return loadFactor;
+    }
+
+    public void setLoadFactor(int loadFactor) {
+        this.loadFactor = loadFactor;
+    }
+
+    public int getLoadFactorPotential() {
+        return loadFactorPotential;
+    }
+
+    public void setLoadFactorPotential(int loadFactorPotential) {
+        this.loadFactorPotential = loadFactorPotential;
     }
 }

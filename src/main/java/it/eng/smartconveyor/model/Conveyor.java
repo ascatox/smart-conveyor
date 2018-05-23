@@ -7,11 +7,8 @@ public class Conveyor {
     private Segment segment;
 
 
-    private Collection<Segment> segmentCollection;
-    private Collection<Slot> slotCollection;
-
-    final static Map<String, Slot> itemAssignmentTable = new Hashtable<>();
-    private Map<Item, Slot> conveyorState; //TODO rappresentazione live (aggironata ogni step) della posizione di ogni item nel suo relativo slot
+    final static Map<String, Slot> itemAssignmentTable = new Hashtable<>(); //
+    private Map<Item, Slot> conveyorState;
 
     private Map<Item, List<Node>> dispatchPlan;
     private String configuration; //TODO
@@ -21,8 +18,6 @@ public class Conveyor {
     }
 
     public Conveyor(Collection<Segment> segmentCollection, Collection<Slot> slotCollection, Map<Item, Slot> conveyorState,Map<Item, List<Node>> dispatchPlan, String configuration) {
-        this.segmentCollection = segmentCollection;
-        this.slotCollection = slotCollection;
         this.conveyorState = conveyorState;
         this.dispatchPlan = dispatchPlan;
         this.configuration = configuration;
@@ -35,22 +30,6 @@ public class Conveyor {
 
     public void setConfiguration(String configuration) {
         this.configuration = configuration;
-    }
-
-    public Collection<Segment> getSegmentCollection() {
-        return segmentCollection;
-    }
-
-    public void setSegmentCollection(Collection<Segment> segmentCollection) {
-        this.segmentCollection = segmentCollection;
-    }
-
-    public Collection<Slot> getSlotCollection() {
-        return slotCollection;
-    }
-
-    public void setSlotCollection(Collection<Slot> slotCollection) {
-        this.slotCollection = slotCollection;
     }
 
     public static Map<String, Slot> getItemAssignmentTable() {
