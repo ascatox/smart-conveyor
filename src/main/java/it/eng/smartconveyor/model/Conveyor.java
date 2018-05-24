@@ -1,31 +1,31 @@
 package it.eng.smartconveyor.model;
 
-import java.util.*;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class Conveyor {
 
-    private Segment segment;
-
-
-    final static Map<String, Slot> itemAssignmentTable = new Hashtable<>(); //
-    private Map<Item, Slot> conveyorState;
-
-    private Map<Item, Bay> dispatchPlan;
-    private String configuration;
+    private Loop loop; //Actual Loop
+    private Map<String, Slot> itemAssignmentTable = new Hashtable<>(); //NOT USED
+    private Map<Item, Slot> conveyorState; //EVERY CLOCK CYCLE
+    private Map<Item, Bay> dispatchPlan; //CHAINCODE EVERY getBay
 
     public Conveyor() {
+        this.itemAssignmentTable = new Hashtable<>();
+        this.conveyorState = new Hashtable<>();
+        this.dispatchPlan = new Hashtable<>();
+        this.loop = new Loop();
     }
 
-
-    public Segment getSegment() {
-        return segment;
+    public Loop getLoop() {
+        return loop;
     }
 
-    public void setSegment(Segment segment) {
-        this.segment = segment;
+    public void setLoop(Loop loop) {
+        this.loop = loop;
     }
 
-    public static Map<String, Slot> getItemAssignmentTable() {
+    public Map<String, Slot> getItemAssignmentTable() {
         return itemAssignmentTable;
     }
 
@@ -45,13 +45,6 @@ public class Conveyor {
         this.dispatchPlan = dispatchPlan;
     }
 
-    public String getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(String configuration) {
-        this.configuration = configuration;
-    }
 }
 
 

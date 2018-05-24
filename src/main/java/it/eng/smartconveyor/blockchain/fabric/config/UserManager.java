@@ -1,8 +1,8 @@
 package it.eng.smartconveyor.blockchain.fabric.config;
 
-import it.eng.productunithubledgerclient.exception.ProductUnitHubException;
-import it.eng.productunithubledgerclient.fabric.helper.ChannelInitializationManager;
-import it.eng.productunithubledgerclient.utils.Utils;
+import it.eng.smartconveyor.blockchain.fabric.helper.ChannelInitializationManager;
+import it.eng.smartconveyor.blockchain.utils.Utils;
+import it.eng.smartconveyor.exception.ConveyorHubException;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +32,7 @@ public class UserManager {
         this.organization = organization;
     }
 
-    public static UserManager getInstance(Configuration configuration, Organization organization) throws ProductUnitHubException, InvalidArgumentException {
+    public static UserManager getInstance(Configuration configuration, Organization organization) throws ConveyorHubException, InvalidArgumentException {
         if (instance == null || !instance.organization.equals(organization)) { //1
             synchronized (ChannelInitializationManager.class) {
                 if (instance == null || !instance.organization.equals(organization)) {  //2
@@ -44,7 +44,7 @@ public class UserManager {
     }
 
 
-    public void completeUsers() throws ProductUnitHubException {
+    public void completeUsers() throws ConveyorHubException {
         try {
             Set<User> users = organization.getUsers();
             for (User user : users) {
@@ -52,7 +52,7 @@ public class UserManager {
             }
         } catch (IOException | NoSuchProviderException | NoSuchAlgorithmException | InvalidKeySpecException e) {
             log.error(e);
-            throw new ProductUnitHubException(e);
+            throw new ConveyorHubException(e);
         }
     }
 

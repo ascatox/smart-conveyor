@@ -1,4 +1,4 @@
-/*
+package it.eng.smartconveyor.blockchain.utils;/*
  *
  *  Copyright 2016,2017 DTCC, Fujitsu Australia Software Technology, IBM - All Rights Reserved.
  *
@@ -44,7 +44,7 @@ public class Utils {
     private final static Logger logger = LogManager.getLogger(Utils.class);
 
 
-    public static void getMessageViolations(Set<ConstraintViolation<ChassisDTO>> violations) throws ConveyorHubException {
+    public static void getMessageViolations(Set<ConstraintViolation<?>> violations) throws ConveyorHubException {
         if (violations.isEmpty())
             return ;
         StringBuilder messageBuilder = new StringBuilder();

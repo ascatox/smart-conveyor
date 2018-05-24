@@ -11,6 +11,7 @@ import org.hyperledger.fabric.sdk.User;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
@@ -24,10 +25,14 @@ final public class LedgerInteractionHelper {
     private final static Logger log = LogManager.getLogger(LedgerInteractionHelper.class);
     private HFClient client;
     private Channel channel;
+    @Autowired
     private ConfigManager configManager;
+    @Autowired
     private UserManager userManager;
+
     private Organization organization;
     private Configuration configuration;
+    @Autowired
     private EventHandler eventHandler;
 
 

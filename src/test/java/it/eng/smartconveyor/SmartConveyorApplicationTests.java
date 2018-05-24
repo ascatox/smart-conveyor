@@ -1,5 +1,7 @@
 package it.eng.smartconveyor;
 
+import org.apache.commons.collections4.queue.CircularFifoQueue;
+import org.apache.commons.lang3.ObjectUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +13,11 @@ public class SmartConveyorApplicationTests {
 
 	@Test
 	public void contextLoads() {
+
+		CircularFifoQueue<Integer>  numbers = new CircularFifoQueue<>();
+		numbers.add(1);
+		numbers.add(2);
+		System.out.println(ObjectUtils.identityToString(numbers));
 	}
 
 }
