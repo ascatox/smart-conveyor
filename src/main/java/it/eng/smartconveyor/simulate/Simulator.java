@@ -2,13 +2,11 @@ package it.eng.smartconveyor.simulate;
 
 import it.eng.smartconveyor.exception.ConveyorHubException;
 import it.eng.smartconveyor.helper.HandlerManager;
-import it.eng.smartconveyor.helper.LoopManager;
 import it.eng.smartconveyor.helper.SlotManager;
 import it.eng.smartconveyor.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,6 +20,8 @@ public final class Simulator {
     private Conveyor conveyor;
     @Autowired
     private HandlerManager handlerManager;
+    @Autowired
+    private  SlotManager slotManager;
 
     public Simulator() {
     }
@@ -29,6 +29,17 @@ public final class Simulator {
 
     public void simulate() throws ConveyorHubException {
             logger.info("Simulation starts!!!");
+            Item item = new Item();   //FIXME read item from file!!!
+            this.slotManager.sensorItemIn(item);     //first OP: add item in the loop
+
+
+
+
+
+
+
+
+
     }
 
 

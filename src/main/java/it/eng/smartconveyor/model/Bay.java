@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Bay {
 
-    private int id;
+    private String id;
     private Slot slot;
     private List<Preference> preferences;
     private int loadFactor;
@@ -13,11 +13,11 @@ public class Bay {
     public Bay() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

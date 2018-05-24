@@ -1,5 +1,6 @@
 package it.eng.smartconveyor.helper;
 
+import it.eng.smartconveyor.exception.ConveyorHubException;
 import it.eng.smartconveyor.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,15 +29,11 @@ public class SlotManager {
         return forkSlot;
 
     }
-    public Slot sensorItemProximity( List<Slot> listOfFork, Item item){
-        logger.info("Item is near the node");
-         Slot slot = handlerManager.doRoute(true, listOfFork, item);
-         return slot;
-    }
 
-    public void sensorItemIn(Item item, Slot[] segmentConveyor) {
-        logger.info("New Item is entering on segment");
-        handlerManager.doInput(true, item, segmentConveyor);
+
+    public void sensorItemIn(Item item) throws ConveyorHubException {
+        logger.info("New Item going to add on loop");
+        handlerManager.doInput(item);
 
     }
 }

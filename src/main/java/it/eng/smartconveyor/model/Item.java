@@ -10,14 +10,14 @@ import javax.xml.bind.annotation.XmlElement;
 
  */
 public class Item {
-    private int id;
+    private String id;
     private String type;
     private Bay bay;
 
     public Item() {
     }
 
-    public Item(int id, String type, Bay bay) {
+    public Item(String  id, String type, Bay bay) {
         this.id = id;
         this.type = type;
         this.bay = bay;
@@ -31,16 +31,14 @@ public class Item {
         this.bay = bay;
     }
 
-    @XmlAttribute
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    @XmlAttribute
     public String getType() {
         return type;
     }

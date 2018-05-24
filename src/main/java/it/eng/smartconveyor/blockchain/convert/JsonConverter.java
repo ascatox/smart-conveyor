@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import it.eng.productunithubledgerclient.exception.ProductUnitHubException;
 import it.eng.productunithubledgerclient.model.ChassisDTO;
 import it.eng.productunithubledgerclient.model.ProcessStep;
+import it.eng.smartconveyor.exception.ConveyorHubException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,21 +25,21 @@ public class JsonConverter {
     }
 
 
-    public static String convertToJson(Object obj) throws ProductUnitHubException {
+    public static String convertToJson(Object obj) throws ConveyorHubException {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.setPropertyNamingStrategy(PropertyNamingStrategy.UPPER_CAMEL_CASE); //This property put data in upper camel case
             return mapper.writeValueAsString(obj);
         } catch (Exception e) {
             log.error(e);
-            throw new ProductUnitHubException(e);
+            throw new ConveyorHubException(e);
         }
     }
 
-    public static Object convertFromJson(String json, Class clazz, boolean isCollection) throws ProductUnitHubException {
+    public static Object convertFromJson(String json, Class clazz, boolean isCollection) throws ConveyorHubException {
         try {
             if (StringUtils.isEmpty(json))
-                throw new ProductUnitHubException("Json data is EMPTY");
+                throw new ConveyorHubException("Json data is EMPTY");
             ObjectMapper mapper = new ObjectMapper();
             mapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true); //This property serialize/deserialize not considering the case of fields
             if (isCollection) {
@@ -54,7 +55,7 @@ public class JsonConverter {
             return mapper.readValue(json, clazz);
         } catch (Exception e) {
             log.error(e);
-            throw new ProductUnitHubException(e);
+            throw new ConveyorHubException(e);
         }
     }
 

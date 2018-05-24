@@ -1,5 +1,6 @@
 package it.eng.smartconveyor.helper;
 
+import it.eng.smartconveyor.blockchain.base.LedgerClient;
 import it.eng.smartconveyor.exception.ConveyorHubException;
 import it.eng.smartconveyor.model.Bay;
 import it.eng.smartconveyor.model.Conveyor;
@@ -21,13 +22,12 @@ import java.util.Map;
 public class HandlerManager {
     private Logger logger = LogManager.getLogger(HandlerManager.class);
 
-    @Autowired
-    LoopManager loopManager;
+
     @Autowired
     Conveyor conveyor;
 
-    //@Autowired
-    //private LedgerClient ledgerClient;
+    @Autowired
+    private LedgerClient ledgerClient;
 
 
     public HandlerManager() {
@@ -35,18 +35,27 @@ public class HandlerManager {
     }
 
 
-    public void doInput(boolean isItemIn, Item item, Slot[] segmentConveyor) {
+    public void doInput(Item item) throws ConveyorHubException {
+
+        Slot slot = new Slot();
+        slot.setItem(item);
+        this.conveyor.getLoop().getSlotList().add(slot);
+        logger.info("Item add on loop with id:" + item.getId());
+        Bay bay = doRoute(item); //query to chaincode for extract
+        item.setBay(bay);
+        upgradeConveyorState(); //upgrade conveyor map
     }
 
-    public Slot doRoute(boolean isItemProximity, List<Slot> listOfFork, Item item) {
-        if (isItemProximity) {
-            logger.info("Item's route found.....");
-            //Slot slot = nodeHelper.actuatorItemPush(listOfFork, numberOfFork, item);
-            //logger.info("Item push on fork number:" + numberOfFork);
-            return null;
-        }
-        return null;
+    public Bay doRoute(Item item) throws ConveyorHubException {
+        logger.info("Searching the bay for this item:" + item.getId());
+        Bay bay = ledgerClient.getBay(item);
+        logger.info("Chaincode answer:" + bay.getId());
+        return bay;
+    }
 
+
+    public void doMovement(Item item) {
+        
     }
 
 
@@ -61,5 +70,6 @@ public class HandlerManager {
     public void updatePlan() throws ConveyorHubException { //TODO
 
     }
+
 
 }
