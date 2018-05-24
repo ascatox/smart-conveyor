@@ -14,10 +14,6 @@ public class SmartConveyorApplicationTests {
 	@Test
 	public void contextLoads() {
 
-		CircularFifoQueue<Integer>  numbers = new CircularFifoQueue<>();
-		numbers.add(1);
-		numbers.add(2);
-		System.out.println(ObjectUtils.identityToString(numbers));
 	}
 
 }

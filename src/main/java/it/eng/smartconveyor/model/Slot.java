@@ -20,7 +20,6 @@ public class Slot {
     }
 
 
-    @XmlTransient
     public int getNumberSlot() {
         return numberSlot;
     }

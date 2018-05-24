@@ -1,19 +1,20 @@
 package it.eng.smartconveyor.model;
 
 import org.apache.commons.collections4.queue.CircularFifoQueue;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * @author ascatox
  */
 public class Loop {
 
-    @Value("${slotList.size}")
+
     private int size;
-    private CircularFifoQueue<Slot> slotList;
+    private CircularArrayList<Item> itemCircularFifoQueue;
 
     public Loop() {
-        slotList = new CircularFifoQueue<>(100); //FIXME Hardcoded
+        itemCircularFifoQueue = new CircularArrayList<>(100); //FIXME Hardcoded
     }
 
 
@@ -25,9 +26,13 @@ public class Loop {
         this.size = size;
     }
 
-    public CircularFifoQueue<Slot> getSlotList() {
-        return slotList;
+    public CircularArrayList<Item> getItemCircularFifoQueue() {
+        return itemCircularFifoQueue;
     }
 
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this,ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 
 }
