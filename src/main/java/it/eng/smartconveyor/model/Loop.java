@@ -13,7 +13,7 @@ public class Loop {
     private CircularFifoQueue<Slot> slotList;
 
     public Loop() {
-        slotList = new CircularFifoQueue<>(50); //FIXME Hardcoded
+        slotList = new CircularFifoQueue<>(100); //FIXME Hardcoded
     }
 
 
