@@ -32,21 +32,20 @@ public final class Simulator {
         logger.info("Simulation step at: " + new Date());
         if (!handlerManager.isEmptyConveyor()) {
             //Insert in Belt
-            Item item = new Item(RandomStringUtils.randomAlphanumeric(10));   //FIXME read item from file!!!
+            Item item = new Item(RandomStringUtils.randomAlphanumeric(10));
+            //FIXME read item from file!!!
             handlerManager.doInput(item, index);
             //Exit from Belt
             handlerManager.doExitFromConveyor();
         }
         logger.info("Conveyor elements: ");
-        conveyor.getLoop().getItemCircularFifoQueue().forEach(i -> {
+        conveyor.getLoop().getItemEvictingQueue().forEach(i -> {
             try {
                 logger.info(index+" -> "+ JsonConverter.convertToJson(i));
-                index++;
             } catch (ConveyorHubException e) {
                 logger.error(e);
             }
         });
-        index++;
     }
 
 

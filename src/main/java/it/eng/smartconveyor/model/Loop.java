@@ -1,5 +1,6 @@
 package it.eng.smartconveyor.model;
 
+import com.google.common.collect.EvictingQueue;
 import org.apache.commons.collections4.queue.CircularFifoQueue;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -10,11 +11,14 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class Loop {
 
 
+    private Item[] itemConveyor;
+    private EvictingQueue<Item> itemEvictingQueue;
     private int size;
-    private CircularArrayList<Item> itemCircularFifoQueue;
 
     public Loop() {
-        itemCircularFifoQueue = new CircularArrayList<>(100); //FIXME Hardcoded
+        this.itemConveyor = new Item[100];
+        this.itemEvictingQueue = EvictingQueue.create(100);
+        //FIXME Hardcoded
     }
 
 
@@ -26,8 +30,16 @@ public class Loop {
         this.size = size;
     }
 
-    public CircularArrayList<Item> getItemCircularFifoQueue() {
-        return itemCircularFifoQueue;
+    public EvictingQueue<Item> getItemEvictingQueue() {
+        return itemEvictingQueue;
+    }
+
+    public Item[] getItemConveyor() {
+        return itemConveyor;
+    }
+
+    public void setItemConveyor(Item[] itemConveyor) {
+        this.itemConveyor = itemConveyor;
     }
 
     @Override
