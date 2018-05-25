@@ -8,22 +8,31 @@ import java.util.Map;
 
 public class Conveyor {
 
-    private Loop loop; //Actual Loop
+    private Belt belt; //Actual Belt
     private Map<String, Slot> itemAssignmentTable = new Hashtable<>(); //NOT USED
     private Map<Item, Bay> dispatchPlan; //CHAINCODE EVERY getBay
+    private int indexConveyor = 0;
 
     public Conveyor() {
         this.itemAssignmentTable = new Hashtable<>();
         this.dispatchPlan = new Hashtable<>();
-        this.loop = new Loop();
+        this.belt = new Belt();
     }
 
-    public Loop getLoop() {
-        return loop;
+    public int getIndexConveyor() {
+        return indexConveyor;
     }
 
-    public void setLoop(Loop loop) {
-        this.loop = loop;
+    public void setIndexConveyor(int indexConveyor) {
+        this.indexConveyor = indexConveyor;
+    }
+
+    public Belt getBelt() {
+        return belt;
+    }
+
+    public void setBelt(Belt belt) {
+        this.belt = belt;
     }
 
     public Map<String, Slot> getItemAssignmentTable() {

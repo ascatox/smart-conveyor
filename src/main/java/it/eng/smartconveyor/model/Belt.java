@@ -8,16 +8,16 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * @author ascatox
  */
-public class Loop {
+public class Belt {
 
 
     private Item[] itemConveyor;
-    private EvictingQueue<Item> itemEvictingQueue;
+    //private EvictingQueue<Item> itemEvictingQueue;
     private int size;
 
-    public Loop() {
+    public Belt() {
         this.itemConveyor = new Item[100];
-        this.itemEvictingQueue = EvictingQueue.create(100);
+       // this.itemEvictingQueue = EvictingQueue.create(100);
         //FIXME Hardcoded
     }
 
@@ -30,9 +30,9 @@ public class Loop {
         this.size = size;
     }
 
-    public EvictingQueue<Item> getItemEvictingQueue() {
-        return itemEvictingQueue;
-    }
+   // public EvictingQueue<Item> getItemEvictingQueue() {
+   //     return itemEvictingQueue;
+   // }
 
     public Item[] getItemConveyor() {
         return itemConveyor;
