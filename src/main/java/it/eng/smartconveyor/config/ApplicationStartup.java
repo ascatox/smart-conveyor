@@ -41,9 +41,10 @@ public class ApplicationStartup
         return;
     }
 
-    @Bean
+   /* @Bean
     public Conveyor instantiateConveyor() {
         return new Conveyor();
     }
+    */
 
 }

@@ -23,8 +23,7 @@ public final class Simulator {
     private Conveyor conveyor;
     @Autowired
     private HandlerManager handlerManager;
-
-    private int index = this.conveyor.getIndexConveyor();
+    private int index;
 
     public Simulator() {
     }
@@ -33,20 +32,17 @@ public final class Simulator {
         logger.info("Simulation step at: " + new Date());
 
 
-
-        if (( this.index +=1) == this.conveyor.getBelt().getItemConveyor().length) {
+        if ((this.index += 1) == this.conveyor.getBelt().getItemConveyor().length) {
             handlerManager.doCircularity();
-            this.index=handlerManager.doExitFromConveyor(this.index);
-        }
-        else {
+            this.index = handlerManager.doExitFromConveyor(this.index);
+        } else {
             //Insert in Belt
             Item item = new Item(RandomStringUtils.randomAlphanumeric(10));
             //FIXME read item from file!!!
-            this.index =handlerManager.doInput(item, this.index);
+            this.index = handlerManager.doInput(item, this.index);
             //Exit from Belt
-            handlerManager.doExitFromConveyor( this.index);
+            handlerManager.doExitFromConveyor(this.index);
         }
-
 
 
     }
@@ -54,6 +50,7 @@ public final class Simulator {
 
     public void startup() throws ConveyorHubException {
         try {
+            this.index = conveyor.getIndexConveyor();
             //Init loop
             //Init baie
             logger.info("Simulation starts");

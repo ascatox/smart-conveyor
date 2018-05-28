@@ -1,4 +1,4 @@
-package it.eng.smartconveyor.model;
+package it.eng.smartconveyor.model.structure;
 
 /**
  * @author ascatox

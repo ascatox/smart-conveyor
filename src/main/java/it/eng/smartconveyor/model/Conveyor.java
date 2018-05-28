@@ -2,10 +2,12 @@ package it.eng.smartconveyor.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.stereotype.Component;
 
 import java.util.Hashtable;
 import java.util.Map;
 
+@Component
 public class Conveyor {
 
     private Belt belt; //Actual Belt
@@ -21,10 +23,6 @@ public class Conveyor {
 
     public int getIndexConveyor() {
         return indexConveyor;
-    }
-
-    public void setIndexConveyor(int indexConveyor) {
-        this.indexConveyor = indexConveyor;
     }
 
     public Belt getBelt() {
@@ -52,6 +50,10 @@ public class Conveyor {
     public String toString() {
         return ToStringBuilder.reflectionToString(this,ToStringStyle.SHORT_PREFIX_STYLE);
     }
+
+
+
+
 
 }
 
