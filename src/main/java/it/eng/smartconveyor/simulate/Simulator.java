@@ -39,7 +39,7 @@ public final class Simulator {
             //Insert in Belt
             Item item = new Item(RandomStringUtils.randomAlphanumeric(10));
             //FIXME read item from file!!!
-            this.index = handlerManager.doInput(item, this.index);
+            this.index = handlerManager.doInput(item, this.index -1);
             //Exit from Belt
             handlerManager.doExitFromConveyor(this.index);
         }

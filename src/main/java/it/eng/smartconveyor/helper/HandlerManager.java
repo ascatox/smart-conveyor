@@ -36,7 +36,8 @@ public class HandlerManager {
         items[0] = item;
         logger.debug("Item" + item.getId() + "add on conveyor...");
         index++;
-        this.conveyor.getBelt().setItemConveyor(doShift(items, index++));  //upgrade the array after shift
+        Item[] items1 = doShift(items, index);
+        this.conveyor.getBelt().setItemConveyor(items1);
         Bay bay = doRoute(item);            //search the bay correctly for this item
         doUpdatePlan(item, bay);          //upgrade the conveyor map
 
@@ -48,12 +49,13 @@ public class HandlerManager {
         logger.info("Searching the bay for this item:" + item.getId());
         Bay bay = new Bay(); //FIXME HardCoded
         bay.setId("3");
+        item.setBay(bay);
         //Bay bay = ledgerClient.getBay(item);
         //logger.info("Chaincode answer:" + bay.getId());
         return bay;
     }
 
-    
+
     private void upgradeSharedState() {
         //TODO
     }
@@ -91,13 +93,18 @@ public class HandlerManager {
     public Item[] doShift(Item[] items, int index) {
 
         for (int i = items.length - 1; i >= 0; i--) {
-            if (items[i] != null || index <= this.conveyor.getBelt().getItemConveyor().length) {
-                items[i + 1] = items[i];
-                logger.debug("All items on conveyor shift to right!!");
+            if (index <= this.conveyor.getBelt().getItemConveyor().length) {
+                if (items[i] != null) {
+                    items[i + 1] = items[i];
+                    logger.debug("All items on conveyor shift to right!!" + items.toString());
+                }
+
             } else {
                 doCircularity();
             }
         }
+        items[0] = null;
+        logger.debug("Conveyor state after shift"  +items.toString());
         return items;
     }
 
