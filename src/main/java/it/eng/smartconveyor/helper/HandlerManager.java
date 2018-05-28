@@ -34,6 +34,7 @@ public class HandlerManager {
 
         Item[] items = this.conveyor.getBelt().getItemConveyor();    //item add on array
         items[0] = item;
+        logger.debug("Item" + item.getId() + "add on conveyor...");
         index++;
         this.conveyor.getBelt().setItemConveyor(doShift(items, index++));  //upgrade the array after shift
         Bay bay = doRoute(item);            //search the bay correctly for this item
@@ -41,11 +42,6 @@ public class HandlerManager {
 
         return index;
 
-  /*      this.conveyor.getBelt().getItemEvictingQueue().offer(item);
-        logger.info("Item add on loop with id:" + item.getId());
-        Bay bay = doRoute(item); //query to chaincode for extract
-        item.setBay(bay);
-        doUpdatePlan(item, bay); //upgrade plan*/
     }
 
     public Bay doRoute(Item item) throws ConveyorHubException {
@@ -57,11 +53,7 @@ public class HandlerManager {
         return bay;
     }
 
-
-    public void doMovement(Item item) {
-    }
-
-
+    
     private void upgradeSharedState() {
         //TODO
     }
@@ -76,35 +68,16 @@ public class HandlerManager {
 
         Item[] items = this.conveyor.getBelt().getItemConveyor();
 
-        for(int i = index; i>0; i--){
+        for (int i = index; i > 0; i--) {
             Item item = items[i];
             int bayId = Integer.parseInt(item.getBay().getId());
-            if( bayId == i ){
+            if (bayId == i) {
                 items[i] = null;
                 logger.info("Item " + item.toString() + " removed from Bay " + item.getBay().toString());
                 index--;
             }
-
         }
-
-
-
         return index;
-
-
-
-        /*
-        EvictingQueue<Item> itemEvictingQueue = conveyor.getBelt().getItemEvictingQueue();
-        for (int i = 0; i < itemEvictingQueue.size(); i++) {
-            Item item = itemEvictingQueue.peek();
-            int bayId = Integer.parseInt(item.getBay().getId());
-            if (bayId == i) {
-                if (null != itemEvictingQueue) {
-                    itemEvictingQueue.remove(i);
-                    logger.info("Item " + item.toString() + " removed from Bay " + item.getBay().toString());
-                }
-            }
-        }*/
     }
 
     public boolean isEmptyConveyor() { //FIXME Only one is correct
@@ -118,11 +91,11 @@ public class HandlerManager {
     public Item[] doShift(Item[] items, int index) {
 
         for (int i = items.length - 1; i >= 0; i--) {
-            if (items[i] != null || index <= this.conveyor.getBelt().getItemConveyor().length)
+            if (items[i] != null || index <= this.conveyor.getBelt().getItemConveyor().length) {
                 items[i + 1] = items[i];
-
-            else {
-                doCircularity(); //???????????????
+                logger.debug("All items on conveyor shift to right!!");
+            } else {
+                doCircularity();
             }
         }
         return items;
@@ -134,8 +107,10 @@ public class HandlerManager {
 
         Item item = items[this.conveyor.getBelt().getItemConveyor().length - 1];
         items[this.conveyor.getBelt().getItemConveyor().length - 1] = null;
-        items = doShift(items, this.conveyor.getBelt().getItemConveyor().length -1);
+        items = doShift(items, this.conveyor.getBelt().getItemConveyor().length - 1);
         this.conveyor.getBelt().setItemConveyor(items);
+        items[0] = item;
+        logger.debug("Item:" + item.getId() + "put in head of array!");
     }
 
 
